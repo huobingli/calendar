@@ -1,13 +1,14 @@
 #include <ATLComTime.h>
 #include "..\DuiLib\UIlib.h"
-
+//#include "../ListDemo/bin/Duilib_u.lib"
 using namespace DuiLib;
 
 #ifdef _DEBUG
 #ifdef _UNICODE
 #pragma comment(lib,"..//bin//DuiLib_ud.lib")
 #else
-#pragma comment(lib,"..//bin//DuiLib_d.lib")
+//#pragma comment(lib,"..//bin//DuiLib_d.lib")
+#pragma comment(lib,"..//ListDemo//bin//DuiLib_d.lib")
 #endif
 #else
 #ifdef _UNICODE
@@ -192,14 +193,14 @@ public:
 	int GetCmbMonth()
 	{
 		CComboUI* pCmb = static_cast<CComboUI*>(m_pm.FindControl(_T("CMB_MONTH")));
-		CStdString cCurMonth = pCmb->GetText();
+		CDuiString cCurMonth = pCmb->GetText();
 		return atoi(cCurMonth.Left(cCurMonth.GetLength() - 1));
 	}
 
 	int SetTxtYear(int iY)
 	{
 		CEditUI* pTxt = static_cast<CEditUI*>(m_pm.FindControl(_T("TXT_YEAR")));
-		CStdString cCurYear = pTxt->GetText();
+		CDuiString cCurYear = pTxt->GetText();
 		int iCurYear = 0;
 		iCurYear = atoi(cCurYear) + iY;
 		cCurYear.Format("%d", iCurYear);

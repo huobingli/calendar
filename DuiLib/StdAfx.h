@@ -1,4 +1,4 @@
-// stdafx.h : include file for standard system include files,
+// StdAfx.h : include file for standard system include files,
 //  or project specific include files that are used frequently, but
 //      are changed infrequently
 //
@@ -7,6 +7,28 @@
 #define AFX_STDAFX_H__E30B2003_188B_4EB4_AB99_3F3734D6CE6C__INCLUDED_
 
 #pragma once
+
+#ifdef __GNUC__
+// 怎么都没找到min，max的头文件-_-
+#ifndef min
+#define min(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+#ifndef max
+#define max(a,b) (((a) > (b)) ? (a) : (b))
+#endif
+#endif
+
+#ifndef __FILET__
+#define __DUILIB_STR2WSTR(str)	L##str
+#define _DUILIB_STR2WSTR(str)	__DUILIB_STR2WSTR(str)
+#ifdef _UNICODE
+#define __FILET__	_DUILIB_STR2WSTR(__FILE__)
+#define __FUNCTIONT__	_DUILIB_STR2WSTR(__FUNCTION__)
+#else
+#define __FILET__	__FILE__
+#define __FUNCTIONT__	__FUNCTION__
+#endif
+#endif
 
 #define _CRT_SECURE_NO_DEPRECATE
 
@@ -27,8 +49,10 @@
 
 // Required for VS 2008 (fails on XP and Win2000 without this fix)
 #ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0500
+#define _WIN32_WINNT _WIN32_WINNT_WINXP//0x0501
 #endif
+
+//#define USE_XIMAGE_EFFECT //使用ximage的gif控件CGifAnimExUI开关，提升性能,默认不使用
 
 #include "UIlib.h"
 

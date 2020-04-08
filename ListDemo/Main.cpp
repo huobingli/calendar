@@ -7,6 +7,7 @@
 #include <vector>
 #include <windows.h>
 #include <objbase.h>
+//#include <atltypes.h>
 
 #include "..\DuiLib\UIlib.h"
 
@@ -16,7 +17,8 @@ using namespace DuiLib;
 #ifdef _UNICODE
 #pragma comment(lib,"..//bin//DuiLib_ud.lib")
 #else
-#pragma comment(lib,"..//bin//DuiLib_d.lib")
+//#pragma comment(lib,"..//bin//DuiLib_d.lib")
+#pragma comment(lib,"..//ListDemo//bin//DuiLib_d.lib")
 #endif
 #else
 #ifdef _UNICODE
@@ -28,7 +30,7 @@ using namespace DuiLib;
 
 UINT Array[6][7];
 
-class CFameWindowWnd:public CWindowWnd,public INotifyUI,public IListCallbackUI
+class CFrameWindowWnd :public CWindowWnd,public INotifyUI,public IListCallbackUI
 {
 	
 public:
@@ -68,7 +70,7 @@ public:
 	{
 		//m_pCurentDate->SetText("");
 		::GetLocalTime(&m_sysTime);		
-		CStdString sText;
+		CDuiString sText;
 		sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
 		m_pBeginCurentDate->SetText(sText);
 		//UINT istr = m_sysTime.wDay;
@@ -97,7 +99,7 @@ public:
 			//单击下个月份
 			if (msg.pSender->GetName() == _T("btn_begin_month_next"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				UINT SelMonth = m_CurMonth%12;
 				if (SelMonth == 0)
 				{
@@ -117,7 +119,7 @@ public:
 			//单击上个月份
 			if (msg.pSender->GetName() == _T("btn_begin_month_last"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				UINT SelMonth = m_CurMonth%12;
 				if (SelMonth == 1)
 				{
@@ -135,7 +137,7 @@ public:
 			//单击下一年份
 			if (msg.pSender->GetName() == _T("btn_begin_year_next"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				++m_CurYear;
 				SetBeginDateInList(m_CurYear,m_CurMonth);
 				sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
@@ -144,7 +146,7 @@ public:
 			//单击上一年份
 			if (msg.pSender->GetName() == _T("btn_begin_year_last"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				--m_CurYear;
 				SetBeginDateInList(m_CurYear,m_CurMonth);
 				sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
@@ -155,7 +157,7 @@ public:
 			//单击下个月份
 			if (msg.pSender->GetName() == _T("btn_end_month_next"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				UINT SelMonth = m_CurMonth % 12;
 				if (SelMonth == 0)
 				{
@@ -175,7 +177,7 @@ public:
 			//单击上个月份
 			if (msg.pSender->GetName() == _T("btn_end_month_last"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				UINT SelMonth = m_CurMonth % 12;
 				if (SelMonth == 1)
 				{
@@ -193,7 +195,7 @@ public:
 			//单击下一年份
 			if (msg.pSender->GetName() == _T("btn_end_year_next"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				++m_CurYear;
 				SetEndDateInList(m_CurYear, m_CurMonth);
 				sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
@@ -202,7 +204,7 @@ public:
 			//单击上一年份
 			if (msg.pSender->GetName() == _T("btn_end_year_last"))
 			{
-				CStdString sText;
+				CDuiString sText;
 				--m_CurYear;
 				SetEndDateInList(m_CurYear, m_CurMonth);
 				sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
@@ -307,14 +309,14 @@ public:
         SIZE szRoundCorner = m_pm.GetRoundCorner();
         if( !::IsIconic(*this) && (szRoundCorner.cx != 0 || szRoundCorner.cy != 0) ) 
 		{
-            CRect rcWnd;
-            ::GetWindowRect(*this, &rcWnd);
-            rcWnd.Offset(-rcWnd.left, -rcWnd.top);
-            rcWnd.right++; 
-			rcWnd.bottom++;
-            HRGN hRgn = ::CreateRoundRectRgn(rcWnd.left, rcWnd.top, rcWnd.right, rcWnd.bottom, szRoundCorner.cx, szRoundCorner.cy);
-            ::SetWindowRgn(*this, hRgn, TRUE);
-            ::DeleteObject(hRgn);
+//             CRect rcWnd;
+//             ::GetWindowRect(*this, &rcWnd);
+//             rcWnd.Offset(-rcWnd.left, -rcWnd.top);
+//             rcWnd.right++; 
+// 			rcWnd.bottom++;
+//             HRGN hRgn = ::CreateRoundRectRgn(rcWnd.left, rcWnd.top, rcWnd.right, rcWnd.bottom, szRoundCorner.cx, szRoundCorner.cy);
+//             ::SetWindowRgn(*this, hRgn, TRUE);
+//             ::DeleteObject(hRgn);
         }
 
         bHandled = FALSE;
@@ -323,19 +325,19 @@ public:
 
 	LRESULT OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
-		MONITORINFO oMonitor = {};
-		oMonitor.cbSize = sizeof(oMonitor);
-		::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTOPRIMARY), &oMonitor);
-		CRect rcWork = oMonitor.rcWork;
-		rcWork.Offset(-rcWork.left, -rcWork.top);
-
-		LPMINMAXINFO lpMMI = (LPMINMAXINFO) lParam;
-		lpMMI->ptMaxPosition.x	= rcWork.left;
-		lpMMI->ptMaxPosition.y	= rcWork.top;
-		lpMMI->ptMaxSize.x		= rcWork.right;
-		lpMMI->ptMaxSize.y		= rcWork.bottom;
-
-		bHandled = FALSE;
+// 		MONITORINFO oMonitor = {};
+// 		oMonitor.cbSize = sizeof(oMonitor);
+// 		::GetMonitorInfo(::MonitorFromWindow(*this, MONITOR_DEFAULTTOPRIMARY), &oMonitor);
+// 		CRect rcWork = oMonitor.rcWork;
+// 		rcWork.Offset(-rcWork.left, -rcWork.top);
+// 
+// 		LPMINMAXINFO lpMMI = (LPMINMAXINFO) lParam;
+// 		lpMMI->ptMaxPosition.x	= rcWork.left;
+// 		lpMMI->ptMaxPosition.y	= rcWork.top;
+// 		lpMMI->ptMaxSize.x		= rcWork.right;
+// 		lpMMI->ptMaxSize.y		= rcWork.bottom;
+// 
+// 		bHandled = FALSE;
 		return 0;
 	}
 
@@ -530,7 +532,7 @@ public:
 	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem)
 	{
 		TCHAR szBuf[MAX_PATH] = {0};
-		CStdString sText;
+		CDuiString sText;
 		sText.SmallFormat(_T("%d"),Array[iIndex][iSubItem]);
 		if (sText == "0")
 		{
@@ -577,7 +579,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,HINSTANCE,LPSTR,int nComdShow)
 	HRESULT Hr = ::CoInitialize(NULL);
     if( FAILED(Hr) ) return 0;
 
-	CFameWindowWnd *pFrame = new CFameWindowWnd();
+	CFrameWindowWnd *pFrame = new CFrameWindowWnd();
     if( pFrame == NULL ) return 0;
     pFrame->Create(NULL, _T("MonthCal"), UI_WNDSTYLE_DIALOG, 0L);
 
