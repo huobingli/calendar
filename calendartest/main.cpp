@@ -21,32 +21,6 @@ using namespace DuiLib;
 #endif
 #endif
 
-class CFrameWindow : public WindowImplBase
-{
-public:
-	CFrameWindow() { };
-	LPCTSTR GetWindowClassName() const { return _T("UIFrameWindow"); };
-	void OnFinalMessage(HWND /*hWnd*/) { delete this; };
-
-	void InitWindow() {  };
-
-	CDuiString GetSkinFile() {
-		return _T("test.xml");
-	}
-	void Notify(TNotifyUI& msg)
-	{
-		CDuiString name = msg.pSender->GetName();
-		if (msg.sType == _T("click"))
-		{
-			//if (name.CompareNoCase(_T()))
-		}
-	}
-
-	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
-	{
-		return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
-	}
-};
 
 class CFrameWindowWnd : public WindowImplBase
 {
@@ -285,6 +259,54 @@ public:
 	CPaintManagerUI m_pm;
 	SYSTEMTIME m_sysTime;
 	COleDateTime cTime;
+};
+
+
+class CFrameWindow : public WindowImplBase
+{
+public:
+	CFrameWindow() { };
+	LPCTSTR GetWindowClassName() const { return _T("UIFrameWindow"); };
+	void OnFinalMessage(HWND /*hWnd*/) { delete this; };
+
+	void InitWindow() {  };
+
+	CDuiString GetSkinFile() {
+		return _T("test.xml");
+	}
+	void Notify(TNotifyUI& msg)
+	{
+		CDuiString name = msg.pSender->GetName();
+		if (msg.sType == _T("click"))
+		{
+			//if (name.CompareNoCase(_T()))
+
+			if (name.CompareNoCase(_T("closebtn")) == 0)
+			{
+				Close(IDCANCEL);
+				return;
+			}
+
+			else if (name.CompareNoCase(_T("calendar")) == 0)
+			{
+				ShowCalendar();
+			}
+		}
+
+	}
+
+	void ShowCalendar()
+	{
+		CFrameWindowWnd* pFrame = new CFrameWindowWnd;
+
+		pFrame->CreateDuiWindow(NULL, _T("ÈÕÀú²âÊÔ"), UI_WNDSTYLE_DIALOG, 0L);
+		pFrame->CenterWindow();
+	}
+
+	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+	{
+		return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
+	}
 };
 
 int ShowCalendar(HINSTANCE hInstance)

@@ -11,6 +11,8 @@ Author: Leon Finker  1/2001
 #include <shlobj.h>
 #include <vector>
 
+#pragma warning(disable:4275)
+
 namespace DuiLib {
 	typedef std::vector<FORMATETC> FormatEtcArray;
 	typedef std::vector<FORMATETC*> PFormatEtcArray;

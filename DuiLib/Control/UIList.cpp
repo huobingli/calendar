@@ -246,7 +246,7 @@ namespace DuiLib {
 			CControlUI* pControl = static_cast<CControlUI*>(m_pHeader->GetItemAt(i));
 			if( !pControl->IsVisible() ) continue;
 			if( pControl->IsFloat() ) continue;
-			RECT rcPos = pControl->GetPos();
+			//RECT rcPos = pControl->GetPos(); remove warning
 			m_ListInfo.rcColumn[i] = pControl->GetPos();
 		}
 		if( !m_pHeader->IsVisible() ) {
@@ -1262,7 +1262,7 @@ namespace DuiLib {
 			}
 			cyFixed += sz.cy + pControl->GetPadding().top + pControl->GetPadding().bottom;
 
-			RECT rcPadding = pControl->GetPadding();
+			//RECT rcPadding = pControl->GetPadding(); remove warning
 			sz.cx = MAX(sz.cx, 0);
 			if( sz.cx < pControl->GetMinWidth() ) sz.cx = pControl->GetMinWidth();
 			if( sz.cx > pControl->GetMaxWidth() ) sz.cx = pControl->GetMaxWidth();

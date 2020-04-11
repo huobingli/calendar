@@ -1943,6 +1943,11 @@ namespace DuiLib {
 		if( pControl == m_pEventClick ) m_pEventClick = NULL;
 		if( pControl == m_pFocus ) m_pFocus = NULL;
 		KillTimer(pControl);
+		if (pControl == NULL)
+		{
+			return;
+		}
+
 		const CDuiString& sName = pControl->GetName();
 		if( !sName.IsEmpty() ) {
 			if( pControl == FindControl(sName) ) m_mNameHash.Remove(sName);
@@ -2239,6 +2244,10 @@ namespace DuiLib {
 		FINDTABINFO info = { 0 };
 		info.pFocus = pControl;
 		info.bForward = false;
+		if (m_pRoot == NULL)
+		{
+			return;
+		}
 		m_pFocus = m_pRoot->FindControl(__FindControlFromTab, &info, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
 		m_bFocusNeeded = true;
 		if( m_pRoot != NULL ) m_pRoot->NeedUpdate();
@@ -2246,7 +2255,7 @@ namespace DuiLib {
 
 	bool CPaintManagerUI::SetTimer(CControlUI* pControl, UINT nTimerID, UINT uElapse)
 	{
-		ASSERT(pControl!=NULL);
+		//ASSERT(pControl!=NULL);
 		ASSERT(uElapse>0);
 		for( int i = 0; i< m_aTimers.GetSize(); i++ ) {
 			TIMERINFO* pTimer = static_cast<TIMERINFO*>(m_aTimers[i]);
@@ -2278,7 +2287,7 @@ namespace DuiLib {
 
 	bool CPaintManagerUI::KillTimer(CControlUI* pControl, UINT nTimerID)
 	{
-		ASSERT(pControl!=NULL);
+		//ASSERT(pControl!=NULL);
 		for( int i = 0; i< m_aTimers.GetSize(); i++ ) {
 			TIMERINFO* pTimer = static_cast<TIMERINFO*>(m_aTimers[i]);
 			if( pTimer->pSender == pControl
@@ -2366,6 +2375,12 @@ namespace DuiLib {
 		FINDTABINFO info1 = { 0 };
 		info1.pFocus = m_pFocus;
 		info1.bForward = bForward;
+
+		if (m_pRoot == NULL)
+		{
+			return false;
+		}
+
 		CControlUI* pControl = m_pRoot->FindControl(__FindControlFromTab, &info1, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
 		if( pControl == NULL ) {  
 			if( bForward ) {
@@ -3619,50 +3634,76 @@ namespace DuiLib {
 
 	CControlUI* CPaintManagerUI::GetRoot() const
 	{
-		ASSERT(m_pRoot);
+		//ASSERT(m_pRoot);
 		return m_pRoot;
 	}
 
 	CControlUI* CPaintManagerUI::FindControl(POINT pt) const
 	{
-		ASSERT(m_pRoot);
-		return m_pRoot->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
+		//ASSERT(m_pRoot);
+
+		CControlUI* pControlUI = NULL;
+		if (m_pRoot)
+		{
+			pControlUI = m_pRoot->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
+		}	
+
+		return pControlUI;
 	}
 
 	CControlUI* CPaintManagerUI::FindControl(LPCTSTR pstrName) const
 	{
-		ASSERT(m_pRoot);
+		//ASSERT(m_pRoot);
 		return static_cast<CControlUI*>(m_mNameHash.Find(pstrName));
 	}
 
 	CControlUI* CPaintManagerUI::FindSubControlByPoint(CControlUI* pParent, POINT pt) const
 	{
 		if( pParent == NULL ) pParent = GetRoot();
-		ASSERT(pParent);
-		return pParent->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
+		//ASSERT(pParent);
+		if (pParent)
+		{
+			return pParent->FindControl(__FindControlFromPoint, &pt, UIFIND_VISIBLE | UIFIND_HITTEST | UIFIND_TOP_FIRST);
+		}
+
+		return NULL;
 	}
 
 	CControlUI* CPaintManagerUI::FindSubControlByName(CControlUI* pParent, LPCTSTR pstrName) const
 	{
-		if( pParent == NULL ) pParent = GetRoot();
-		ASSERT(pParent);
-		return pParent->FindControl(__FindControlFromName, (LPVOID)pstrName, UIFIND_ALL);
+		if (pParent == NULL) pParent = GetRoot();
+		//ASSERT(pParent);
+		if (pParent)
+		{
+			return pParent->FindControl(__FindControlFromName, (LPVOID)pstrName, UIFIND_ALL);
+		}
+
+		return NULL;
 	}
 
 	CControlUI* CPaintManagerUI::FindSubControlByClass(CControlUI* pParent, LPCTSTR pstrClass, int iIndex)
 	{
 		if( pParent == NULL ) pParent = GetRoot();
-		ASSERT(pParent);
-		m_aFoundControls.Resize(iIndex + 1);
-		return pParent->FindControl(__FindControlFromClass, (LPVOID)pstrClass, UIFIND_ALL);
+		//ASSERT(pParent);
+		if (pParent)
+		{
+			m_aFoundControls.Resize(iIndex + 1);
+			return pParent->FindControl(__FindControlFromClass, (LPVOID)pstrClass, UIFIND_ALL);
+		}
+
+		return NULL;
 	}
 
 	CStdPtrArray* CPaintManagerUI::FindSubControlsByClass(CControlUI* pParent, LPCTSTR pstrClass)
 	{
 		if( pParent == NULL ) pParent = GetRoot();
-		ASSERT(pParent);
+		//ASSERT(pParent);
 		m_aFoundControls.Empty();
-		pParent->FindControl(__FindControlsFromClass, (LPVOID)pstrClass, UIFIND_ALL);
+		if (pParent)
+		{
+			pParent->FindControl(__FindControlsFromClass, (LPVOID)pstrClass, UIFIND_ALL);
+		}
+
 		return &m_aFoundControls;
 	}
 

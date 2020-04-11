@@ -15,7 +15,7 @@
     </HorizontalLayout>
     <HorizontalLayout height="42" childpadding="8" inset="20,10,20,5">
       <Control/>
-      <Button name="confirm_btn" text="确定" width="70" height="28" font="1" style="confirm_btn_style"/>
+      <Button name="calendar" text="日历" width="70" height="28" font="1" style="confirm_btn_style"/>
       <Button name="cancel_btn"  text="取消" width="70" height="28"  font="1" style="cancel_btn_style" padding="16" />
     </HorizontalLayout>
   </VerticalLayout>

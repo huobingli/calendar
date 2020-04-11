@@ -207,7 +207,7 @@ namespace DuiLib
 				Invalidate();
 			}
 
-			POINT pt = event.ptMouse;
+			//POINT pt = event.ptMouse; remove warning
 			RECT rcThumb = GetThumbRect();
 			if( IsEnabled() && ::PtInRect(&rcThumb, event.ptMouse) ) {
 				m_uButtonState |= UISTATE_HOT;
@@ -221,7 +221,7 @@ namespace DuiLib
 		}
 		if( event.Type == UIEVENT_SETCURSOR )
 		{
-			RECT rcThumb = GetThumbRect();
+			//RECT rcThumb = GetThumbRect(); remove warning
 			if( IsEnabled()) {
 				::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
 				return;
