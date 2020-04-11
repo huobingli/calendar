@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<Window size="429,470" sizebox="4,4,6,6" caption="0,0,0,30">
+<Window size="860,378" sizebox="4,4,6,6" caption="0,0,0,30">
     <VerticalLayout name="VerticalLayoutUI1" pos="205,186,265,216" width="60" height="30" bkimage="body.png" bordercolor="#009DABCE">
         <Container name="ContainerUI1" pos="0,0,429,50" width="429" height="50">
             <Button name="BTN_UP_MONTH" text="&lt;&lt;" float="true" pos="18,14,57,36" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
@@ -75,14 +75,6 @@
             <Button name="ButtonUI38" float="true" pos="306,221,367,266" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
             <Button name="ButtonUI39" float="true" pos="367,221,428,266" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
         </Container>
-        <Container name="ContainerUI4" pos="0,379,429,360" width="429" height="25">
-            <Button name="ButtonUI47" text="星期日" float="true" pos="1,1,62,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-            <Button name="ButtonUI48" text="星期一" float="true" pos="62,1,123,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-            <Button name="ButtonUI49" text="星期二" float="true" pos="123,1,184,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-            <Button name="ButtonUI50" text="星期三" float="true" pos="184,1,245,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-            <Button name="ButtonUI51" text="星期四" float="true" pos="245,1,306,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-            <Button name="ButtonUI52" text="星期五" float="true" pos="306,1,367,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-            <Button name="ButtonUI53" text="星期六" float="true" pos="367,1,428,26" bkimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;cells.png&apos; source=&apos;0,0,81,81&apos;" hotimage="file=&apos;cells.png&apos; source=&apos;0,81,81,162&apos;" />
-        </Container>
     </VerticalLayout>
+    
 </Window>

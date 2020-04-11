@@ -1,5 +1,8 @@
+#include <windows.h>
+#include <objbase.h>
 #include <ATLComTime.h>
 #include "..\DuiLib\UIlib.h"
+#include "..\DuiLib\Core\UIBase.h"
 //#include "../ListDemo/bin/Duilib_u.lib"
 using namespace DuiLib;
 
@@ -18,10 +21,43 @@ using namespace DuiLib;
 #endif
 #endif
 
-class CFrameWindowWnd : public CWindowWnd, public INotifyUI
+class CFrameWindow : public WindowImplBase
+{
+public:
+	CFrameWindow() { };
+	LPCTSTR GetWindowClassName() const { return _T("UIFrameWindow"); };
+	void OnFinalMessage(HWND /*hWnd*/) { delete this; };
+
+	void InitWindow() {  };
+
+	CDuiString GetSkinFile() {
+		return _T("test.xml");
+	}
+	void Notify(TNotifyUI& msg)
+	{
+		CDuiString name = msg.pSender->GetName();
+		if (msg.sType == _T("click"))
+		{
+			//if (name.CompareNoCase(_T()))
+		}
+	}
+
+	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+	{
+		return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
+	}
+};
+
+class CFrameWindowWnd : public WindowImplBase
 {
 public:
 	CFrameWindowWnd() { };
+
+	void InitWindow() {  };
+
+	CDuiString GetSkinFile() {
+		return _T("Calendar1.xml");
+	}
 	LPCTSTR GetWindowClassName() const { return _T("UIMainFrame"); };
 	//UINT GetClassStyle() const { return UI_CLASSSTYLE_FRAME | CS_DBLCLKS; };
 	UINT GetClassStyle() const { return CS_DBLCLKS; };
@@ -148,6 +184,42 @@ public:
 				DrawBtnBackImage(pButtonUI, false);
 			}
 		}
+
+		CControlUI* pButtonUI1;
+		CContainerUI* pControl1 = static_cast<CContainerUI*>(m_pm.FindControl(_T("ContainerUI13")));
+
+		if (pControl1)
+		{
+			for (int i = 0; i < 42; i++)
+			{
+				pButtonUI1 = m_pm.FindSubControlByClass(pControl1, _T("ButtonUI1"), i);
+
+				if (pButtonUI1 == NULL)
+					continue;
+				//上月
+				if (i < iStartDay)
+				{
+					iLastMonthStartDays++;
+					sprintf(cDay, "%d", iLastMonthStartDays);
+					pButtonUI1->SetText(cDay);
+					DrawBtnBackImage(pButtonUI1, false);
+				}
+				else if (i > iStartDay - 1 && iDay < iMonthDays)
+				{
+					iDay++;
+					sprintf(cDay, "%d", iDay);
+					pButtonUI1->SetText(cDay);
+					DrawBtnBackImage(pButtonUI1, true);
+				}
+				else
+				{
+					iNextMonthDays++;
+					sprintf(cDay, "%d", iNextMonthDays);
+					pButtonUI1->SetText(cDay);
+					DrawBtnBackImage(pButtonUI1, false);
+				}
+			}
+		}		
 	}
 
 	void DrawBtnBackImage(CControlUI* pButtonUI, bool isEnable)
@@ -215,23 +287,67 @@ public:
 	COleDateTime cTime;
 };
 
+int ShowCalendar(HINSTANCE hInstance)
+{
+  	CPaintManagerUI::SetInstance(hInstance);
+   	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+//  
+//  	HRESULT Hr = ::CoInitialize(NULL);
+//  	if (FAILED(Hr)) return 0;
+//  
+//  	CFrameWindowWnd* pFrame = new CFrameWindowWnd();
+//  	if (pFrame == NULL) return 0;
+//  	//   pFrame->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE);
+//  	pFrame->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_DIALOG, WS_EX_STATICEDGE | WS_EX_APPWINDOW, 0, 0, 600, 320);   //禁止双击放大
+//  	pFrame->CenterWindow();
+//  	pFrame->ShowWindow(true);
+//  	CPaintManagerUI::MessageLoop();
+//  
+//  	::CoUninitialize();
+
+// 	CFrameWindowWnd* pFrame = new CFrameWindowWnd;
+// 
+// 	pFrame->CreateDuiWindow(NULL, _T("test.xml"), UI_WNDSTYLE_DIALOG, 0L);
+// 	pFrame->CenterWindow();
+
+	CFrameWindow* pFrame = new CFrameWindow();
+	pFrame->CreateDuiWindow(NULL, _T("test.xml"), UI_WNDSTYLE_DIALOG, 0L);
+	pFrame->CenterWindow();
+
+	CPaintManagerUI::MessageLoop();
+	return 0;
+}
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
 {
-	CPaintManagerUI::SetInstance(hInstance);
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+// 	CPaintManagerUI::SetInstance(hInstance);
+// 	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+// 
+// 	HRESULT Hr = ::CoInitialize(NULL);
+// 	if (FAILED(Hr)) return 0;
+// 
+// 	CFrameWindowWnd* pFrame = new CFrameWindowWnd();
+// 	if (pFrame == NULL) return 0;
+// 	//   pFrame->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE);
+// 	pFrame->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_DIALOG, WS_EX_STATICEDGE | WS_EX_APPWINDOW, 0, 0, 600, 320);   //禁止双击放大
+// 	pFrame->CenterWindow();
+// 	pFrame->ShowWindow(true);
+// 	CPaintManagerUI::MessageLoop();
+// 
+// 	::CoUninitialize();
 
-	HRESULT Hr = ::CoInitialize(NULL);
-	if (FAILED(Hr)) return 0;
+	//CPaintManagerUI::SetInstance(hInstance);
+// 	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+// 
+// 	HRESULT Hr = ::CoInitialize(NULL);
+// 	if (FAILED(Hr)) return 0;
+// 	CFrameWindow* pWnd = new CFrameWindow();
+// 	if (pWnd == NULL) return 0;
+// 
+// 	pWnd->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_DIALOG, WS_EX_STATICEDGE | WS_EX_APPWINDOW, 0, 0, 300, 200);
 
-	CFrameWindowWnd* pFrame = new CFrameWindowWnd();
-	if (pFrame == NULL) return 0;
-	//   pFrame->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE);
-	pFrame->Create(NULL, _T("日历控件测试"), UI_WNDSTYLE_DIALOG, WS_EX_STATICEDGE | WS_EX_APPWINDOW, 0, 0, 600, 320);   //禁止双击放大
-	pFrame->CenterWindow();
-	pFrame->ShowWindow(true);
-	CPaintManagerUI::MessageLoop();
-
-	::CoUninitialize();
+	ShowCalendar(hInstance);
 	return 0;
 }
+
+

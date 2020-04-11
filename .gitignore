@@ -36,7 +36,10 @@
 *.ilk
 *.log
 *.idb
+*.bsc
 
+Duilib.tlog/
 ListDemo.tlog/
+calendartest.tlog/
 .vs/
 Release/

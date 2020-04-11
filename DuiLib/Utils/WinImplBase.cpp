@@ -303,14 +303,17 @@ namespace DuiLib
 			CDuiString sError = _T("加载资源文件失败：");
 			sError += GetSkinFile();
 			MessageBox(NULL, sError, _T("Duilib") ,MB_OK|MB_ICONERROR);
-			ExitProcess(1);
+			//ExitProcess(1);
 			return 0;
 		}
-		m_pm.AttachDialog(pRoot);
+
 		// 添加Notify事件接口
-		m_pm.AddNotifier(this);
 		// 窗口初始化完毕
-		InitWindow();
+		if (m_pm.AttachDialog(pRoot) && m_pm.AddNotifier(this))
+		{
+			InitWindow();
+		}		
+		
 		return 0;
 	}
 

@@ -523,7 +523,11 @@ public:
 				//CListContainerElementUI* pListElement = (CListContainerElementUI*)lParam;
 				//CListUI*pListBegin = static_cast<CListUI*>(m_pm.FindControl("BeginDateList"));
 				if (pList)
+				{
 					pList->Add(pListElement);
+					pListElement->SetOwner(pList);
+
+				}
 			}
 		}
 
