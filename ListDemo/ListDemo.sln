@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28010.2003
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ListDemo", "ListDemo.vcxproj", "{223017E7-7805-40D5-9D96-AABF572F57D1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "calendartest", "..\calendartest\calendartest.vcxproj", "{92CA644E-1C18-43A4-AF0B-68E3503FA6BC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DuiLib", "..\DuiLib\DuiLib.vcxproj", "{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HxCalendar", "..\HxCalendar\HxCalendar.vcxproj", "{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -149,6 +151,46 @@ Global
 		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.UnicodeRelease|Win32.Build.0 = Release|Win32
 		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.UnicodeRelease|x64.ActiveCfg = Release|x64
 		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.UnicodeRelease|x64.Build.0 = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Debug|Win32.ActiveCfg = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Debug|Win32.Build.0 = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Debug|x64.ActiveCfg = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Debug|x64.Build.0 = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.DebugA|Win32.ActiveCfg = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.DebugA|Win32.Build.0 = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.DebugA|x64.ActiveCfg = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.DebugA|x64.Build.0 = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Release|Win32.ActiveCfg = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Release|Win32.Build.0 = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Release|x64.ActiveCfg = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.Release|x64.Build.0 = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.ReleaseA|Win32.ActiveCfg = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.ReleaseA|Win32.Build.0 = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.ReleaseA|x64.ActiveCfg = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.ReleaseA|x64.Build.0 = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebug|Win32.ActiveCfg = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebug|Win32.Build.0 = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebug|x64.ActiveCfg = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebug|x64.Build.0 = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebugA|Win32.ActiveCfg = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebugA|Win32.Build.0 = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebugA|x64.ActiveCfg = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SDebugA|x64.Build.0 = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SRelease|Win32.ActiveCfg = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SRelease|Win32.Build.0 = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SRelease|x64.ActiveCfg = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SRelease|x64.Build.0 = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SReleaseA|Win32.ActiveCfg = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SReleaseA|Win32.Build.0 = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SReleaseA|x64.ActiveCfg = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.SReleaseA|x64.Build.0 = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeDebug|Win32.ActiveCfg = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeDebug|Win32.Build.0 = Debug|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeDebug|x64.ActiveCfg = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeDebug|x64.Build.0 = Debug|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeRelease|Win32.ActiveCfg = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeRelease|Win32.Build.0 = Release|Win32
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeRelease|x64.ActiveCfg = Release|x64
+		{30DB5FF2-DD66-4A08-A7E4-EAE05F252797}.UnicodeRelease|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

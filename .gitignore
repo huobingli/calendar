@@ -38,8 +38,11 @@
 *.idb
 *.bsc
 
+
 Duilib.tlog/
 ListDemo.tlog/
 calendartest.tlog/
+CHxCalendar.tlog/
+HxCalendar.tlog/
 .vs/
 Release/
