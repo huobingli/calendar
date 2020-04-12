@@ -66,6 +66,11 @@ public:
 		delete this;
 	};
 
+// 	void InitWindow()
+// 	{
+// 		OnPrepare();
+// 	}
+
 	void OnPrepare(void) 
 	{
 		//m_pCurentDate->SetText("");

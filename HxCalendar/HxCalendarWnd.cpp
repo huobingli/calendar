@@ -16,12 +16,44 @@ void HxCalendarWnd::InitWindow()
 	m_pCloseBtn = static_cast<CButtonUI*>(m_pm.FindControl(_T("btn_monthcal_close")));
 	m_pBeginCurentDate = static_cast<CLabelUI*>(m_pm.FindControl(_T("lab_begin_year_month")));
 	m_pEndCurentDate = static_cast<CLabelUI*>(m_pm.FindControl(_T("lab_end_year_month")));
+
+// 	::GetLocalTime(&m_sysTime);
+// 	CDuiString sText;
+// 	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+// 	if (m_pBeginCurentDate)
+// 		m_pBeginCurentDate->SetText(sText);
+// 	m_CurYear = m_sysTime.wYear;
+// 	m_CurMonth = m_sysTime.wMonth;
+// 	SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
+// 
+// 	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+// 	if (m_pEndCurentDate)
+// 		m_pEndCurentDate->SetText(sText);
+// 	SetEndDateInList(m_CurYear, m_CurMonth);
 }
 
 void HxCalendarWnd::Notify(TNotifyUI& msg)
 {
 	CDuiString strName = msg.pSender->GetName();
 
+	if (msg.sType == _T("windowinit"))
+	{
+		::GetLocalTime(&m_sysTime);
+		CDuiString sText;
+		sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+		if(m_pBeginCurentDate)
+			m_pBeginCurentDate->SetText(sText);
+		//UINT istr = m_sysTime.wDay;
+		//InsertList(m_sysTime.wYear,m_sysTime.wMonth);
+		m_CurYear = m_sysTime.wYear;
+		m_CurMonth = m_sysTime.wMonth;
+		SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
+
+		sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+		if (m_pEndCurentDate)
+			m_pEndCurentDate->SetText(sText);
+		SetEndDateInList(m_CurYear, m_CurMonth);
+	}
 	if (msg.sType == DUI_MSGTYPE_CLICK)
 	{
 		if (strName.CompareNoCase(_T("closebtn")) == 0)
@@ -148,19 +180,6 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 LRESULT HxCalendarWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	LRESULT lRes = 0;
-	//BOOL bHandled = TRUE;
-	switch (uMsg)
-	{
-	case WM_ADDLISTITEM:
-		lRes = OnAddListItem(uMsg, wParam, lParam, bHandled);
-		bHandled = TRUE;
-		break;
-	default:
-		bHandled = FALSE;
-	}
-	if (bHandled) return 0;
-	//return 0;
 	return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
 }
 
