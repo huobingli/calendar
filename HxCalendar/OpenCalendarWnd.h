@@ -19,7 +19,7 @@ public:
 	LPCTSTR GetWindowClassName() const { return _T("UIOpenCalendar"); };
 
 	void Notify(TNotifyUI& msg);
-
+	void ShowHxCalendar();
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 };
 

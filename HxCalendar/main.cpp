@@ -2,6 +2,9 @@
 #include <objbase.h>
 #include <ATLComTime.h>
 
+#include "HxCalendarWnd.h"
+#include "OpenCalendarWnd.h"
+
 #ifdef _DEBUG
 #ifdef _UNICODE
 #pragma comment(lib,"..//bin//DuiLib_ud.lib")
@@ -19,6 +22,12 @@
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
 {
+	CPaintManagerUI::SetInstance(hInstance);
+	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+	OpenCalendarWnd *pFrame = new OpenCalendarWnd;
 
+	pFrame->CreateDuiWindow(NULL, _T("ÈÕÀú²âÊÔ"), UI_WNDSTYLE_DIALOG, 0L);
+	pFrame->CenterWindow();
+	CPaintManagerUI::MessageLoop();
 	return 0;
 }
