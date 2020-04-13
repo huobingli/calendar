@@ -17,46 +17,42 @@ void HxCalendarWnd::InitWindow()
 	m_pBeginCurentDate = static_cast<CLabelUI*>(m_pm.FindControl(_T("lab_begin_year_month")));
 	m_pEndCurentDate = static_cast<CLabelUI*>(m_pm.FindControl(_T("lab_end_year_month")));
 
-// 	::GetLocalTime(&m_sysTime);
-// 	CDuiString sText;
-// 	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
-// 	if (m_pBeginCurentDate)
-// 		m_pBeginCurentDate->SetText(sText);
-// 	m_CurYear = m_sysTime.wYear;
-// 	m_CurMonth = m_sysTime.wMonth;
-// 	SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
-// 
-// 	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
-// 	if (m_pEndCurentDate)
-// 		m_pEndCurentDate->SetText(sText);
-// 	SetEndDateInList(m_CurYear, m_CurMonth);
+	::GetLocalTime(&m_sysTime);
+	CDuiString sText;
+	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+	if (m_pBeginCurentDate)
+		m_pBeginCurentDate->SetText(sText);
+	m_CurYear = m_sysTime.wYear;
+	m_CurMonth = m_sysTime.wMonth;
+	SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
+
+	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+	if (m_pEndCurentDate)
+		m_pEndCurentDate->SetText(sText);
+	SetEndDateInList(m_CurYear, m_CurMonth);
 }
+
+// LRESULT HxCalendarWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+// {
+// 	m_pm.Init(m_hWnd);
+// 	CDialogBuilder builder;
+// 	//CControlUI *pRoot = builder.Create(_T("hxCalendar.xml"), (UINT)0, NULL, &m_pm);
+// 	//ASSERT(pRoot);
+// 	m_pm.AttachDialog(m_pRoot);
+// 	m_pm.AddNotifier(this);
+// 	//Init();
+// 
+// 	return 0;
+// }
+
 
 void HxCalendarWnd::Notify(TNotifyUI& msg)
 {
 	CDuiString strName = msg.pSender->GetName();
 
-	if (msg.sType == _T("windowinit"))
-	{
-		::GetLocalTime(&m_sysTime);
-		CDuiString sText;
-		sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
-		if(m_pBeginCurentDate)
-			m_pBeginCurentDate->SetText(sText);
-		//UINT istr = m_sysTime.wDay;
-		//InsertList(m_sysTime.wYear,m_sysTime.wMonth);
-		m_CurYear = m_sysTime.wYear;
-		m_CurMonth = m_sysTime.wMonth;
-		SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
-
-		sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
-		if (m_pEndCurentDate)
-			m_pEndCurentDate->SetText(sText);
-		SetEndDateInList(m_CurYear, m_CurMonth);
-	}
 	if (msg.sType == DUI_MSGTYPE_CLICK)
 	{
-		if (strName.CompareNoCase(_T("closebtn")) == 0)
+		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
 		{
 			Close(IDCANCEL);
 			return;
@@ -180,6 +176,17 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 LRESULT HxCalendarWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
+// 	LRESULT lRes;
+// 	switch (uMsg)
+// 	{
+// 	case WM_CREATE:
+// 		lRes = OnCreate(uMsg, wParam, lParam, bHandled);
+// 		break;
+// 	default:
+// 		bHandled = FALSE;
+// 	}
+// 
+// 	if (bHandled) return lRes;
 	return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
 }
 
@@ -227,7 +234,7 @@ void HxCalendarWnd::SetBeginDateInList(UINT year, UINT month)
 			m_Array[i][j] = 0;
 		}
 	}
-	//pList->SetTextCallback(this);
+	pList->SetTextCallback(this);
 	InsertList(pList, year, month);
 }
 
@@ -249,7 +256,7 @@ void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 			m_Array[i][j] = 0;
 		}
 	}
-	//pList->SetTextCallback(this);
+	pList->SetTextCallback(this);
 	InsertList(pList, year, month);
 }
 

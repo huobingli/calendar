@@ -8,7 +8,7 @@
 using namespace DuiLib;
 
 
-class HxCalendarWnd : public WindowImplBase
+class HxCalendarWnd : public WindowImplBase, public IListCallbackUI
 {
 public:
 	HxCalendarWnd();
@@ -24,7 +24,7 @@ public:
 	void Notify(TNotifyUI& msg);
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-
+	//LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 protected:
 	UINT GetMonthOfDays(UINT year, UINT month);
 
@@ -42,7 +42,7 @@ private:
 	UINT m_Array[6][7];
 	UINT m_CurYear;
 	UINT m_CurMonth;
-	CPaintManagerUI m_pm;
+	//CPaintManagerUI m_pm;
 	SYSTEMTIME m_sysTime;
 
 	CButtonUI * m_pCloseBtn;

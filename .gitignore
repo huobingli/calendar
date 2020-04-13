@@ -37,7 +37,10 @@
 *.log
 *.idb
 *.bsc
-
+*.bak
+*.dll
+*.lib
+*.exp
 
 Duilib.tlog/
 ListDemo.tlog/
