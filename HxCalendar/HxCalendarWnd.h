@@ -7,6 +7,12 @@
 
 using namespace DuiLib;
 
+class CCalendarTextElementUI : public CListTextElementUI
+{
+public:
+	CCalendarTextElementUI();
+	~CCalendarTextElementUI();
+};
 
 class HxCalendarWnd : public WindowImplBase, public IListCallbackUI
 {
@@ -24,7 +30,6 @@ public:
 	void Notify(TNotifyUI& msg);
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	//LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 protected:
 	UINT GetMonthOfDays(UINT year, UINT month);
 

@@ -1,6 +1,16 @@
 #include "HxCalendarWnd.h"
 
 
+CCalendarTextElementUI::CCalendarTextElementUI()
+{
+
+}
+
+CCalendarTextElementUI::~CCalendarTextElementUI()
+{
+
+}
+
 
 HxCalendarWnd::HxCalendarWnd()
 {
@@ -31,20 +41,6 @@ void HxCalendarWnd::InitWindow()
 		m_pEndCurentDate->SetText(sText);
 	SetEndDateInList(m_CurYear, m_CurMonth);
 }
-
-// LRESULT HxCalendarWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-// {
-// 	m_pm.Init(m_hWnd);
-// 	CDialogBuilder builder;
-// 	//CControlUI *pRoot = builder.Create(_T("hxCalendar.xml"), (UINT)0, NULL, &m_pm);
-// 	//ASSERT(pRoot);
-// 	m_pm.AttachDialog(m_pRoot);
-// 	m_pm.AddNotifier(this);
-// 	//Init();
-// 
-// 	return 0;
-// }
-
 
 void HxCalendarWnd::Notify(TNotifyUI& msg)
 {
@@ -288,7 +284,7 @@ void HxCalendarWnd::InsertList(CListUI *pList, UINT year, UINT month)
 			}
 		}
 
-		CListTextElementUI* pListElement = new CListTextElementUI;
+		CCalendarTextElementUI* pListElement = new CCalendarTextElementUI;
 		//CListContainerElementUI* pListElement = new CListContainerElementUI;
 		pListElement->SetTag(i);
 		if (pListElement != NULL)
@@ -325,7 +321,7 @@ LPCTSTR HxCalendarWnd::GetItemText(CControlUI* pControl, int iIndex, int iSubIte
 
 LRESULT HxCalendarWnd::OnAddListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	CListTextElementUI* pListElement = (CListTextElementUI*)lParam;
+	CCalendarTextElementUI* pListElement = (CCalendarTextElementUI*)lParam;
 	//CListContainerElementUI* pListElement = (CListContainerElementUI*)lParam;
 	CListUI*pListBegin = static_cast<CListUI*>(m_pm.FindControl("BeginDateList"));
 	if (pListBegin)
