@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window size="448,174">
+<Window size="530,174">
+
+    <Font id="1" name="宋体" size="14"/>
+
+    <Style name="label_days_style" value="width=&quot;70&quot; height=&quot;24&quot;  bkcolor=&quot;#FFAAAAAA&quot; borderround=&quot;3,3&quot; textcolor=&quot;#FF000000&quot; font=&quot;1&quot;  bordersize=&quot;1,1,1,1&quot; bordercolor=&quot;#FF479ef6&quot; focusbordercolor=&quot;#ff3a84ce&quot; padding=&quot;0,2,0,2&quot; " />
+    <Style name="btn_days_style" value="width=&quot;70&quot; height=&quot;24&quot; cursor=&quot;hand&quot; bkcolor=&quot;#FFAAAAAA&quot; cursor=&quot;hand&quot; pushedbkcolor=&quot;#FFCCCCCC&quot; borderround=&quot;3,3&quot; textcolor=&quot;#FF000000&quot; font=&quot;1&quot;  bordersize=&quot;1,1,1,1&quot; bordercolor=&quot;#FF479ef6&quot; focusbordercolor=&quot;#ff3a84ce&quot; padding=&quot;0,2,0,2&quot; " />
+
     <HorizontalLayout>
-    <VerticalLayout width="225" height="174" bkimage="calendar/background.bmp">
+    <VerticalLayout width="80" height="174" bkimage="calendar/background.bmp" inset="3,3,3,3" bordersize="0,0,1,0" bordercolor="#FFCCCCCC">
+        <Label text="快捷" style="label_days_style" />
+        <Button name="btn_five_days" text="五日" style="btn_days_style" />
+        <Button name="btn_five_days" text="十日" style="btn_days_style" />
+        <Button name="btn_five_days" text="三十日" style="btn_days_style" />
+        <Button name="btn_five_days" text="三个月" style="btn_days_style" />
+        <Button name="btn_five_days" text="一年" style="btn_days_style" />
+    </VerticalLayout>
+
+    <VerticalLayout width="225" height="174" bkimage="calendar/background.bmp" bordersize="0,0,1,0" bordercolor="#FFCCCCCC">
         <VerticalLayout height="24">
             <Button name="btn_begin_year_last" text="&lt;&lt;" float="true" pos="5,4,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
             <Button name="btn_begin_month_last" text="&lt;" float="true" pos="25,4,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
@@ -32,7 +47,7 @@
             <Label name="lab_end_year_month" float="true" pos="53,4,0,0" width="95" height="18" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
             <Button name="btn_end_month_next" text="&gt;" float="true" pos="155,4,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
             <Button name="btn_end_year_next" text="&gt;&gt;" float="true" pos="175,4,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" />
-            <Button name="btn_monthcal_close" float="true" pos="196,4,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;32,0,48,16&apos;" />
+            <Button name="btn_monthcal_close" float="true" pos="204,4,0,0" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;32,0,48,16&apos;" />
         </VerticalLayout>
         <HorizontalLayout>
             <Container width="10" height="162" />
