@@ -7,12 +7,39 @@
 
 using namespace DuiLib;
 
-class CCalendarTextElementUI : public CListTextElementUI
+class CCalendarItemUI : public COptionUI
+{
+	DECLARE_DUICONTROL(CCalendarItemUI)
+public:
+	CCalendarItemUI();
+	~CCalendarItemUI(void);
+
+public:
+	void DoEvent(DuiLib::TEventUI& event);
+	virtual void PaintStatusImage(HDC hDC);
+
+public:
+	void SetIcon(HICON hIcon);
+
+private:
+	HICON m_hIcon;
+};
+
+
+class CDialogBuilderCallbackEx : public IDialogBuilderCallback
 {
 public:
-	CCalendarTextElementUI();
-	~CCalendarTextElementUI();
+	CControlUI* CreateControl(LPCTSTR pstrClass)
+	{
+//		if (_tcsicmp(pstrClass, _T("GameList")) == 0) return new CGameListUI;
+		if (_tcsicmp(pstrClass, _T("GameItem")) == 0) return new CCalendarItemUI;
+// 		else if (_tcsicmp(pstrClass, _T("ShortCut")) == 0) return new CShortCutUI;
+// 		else if (_tcsicmp(pstrClass, _T("LabelMutiline")) == 0) return new CLabelMutilineUI;
+		return NULL;
+	}
 };
+
+
 
 class HxCalendarWnd : public WindowImplBase, public IListCallbackUI
 {
@@ -31,12 +58,14 @@ public:
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 protected:
+	void InitEndTileList();
 	UINT GetMonthOfDays(UINT year, UINT month);
 
 	UINT GetWeek(UINT year, UINT month, UINT day);
 
 	void SetBeginDateInList(UINT year, UINT month);
 	void SetEndDateInList(UINT year, UINT month);
+	void InsertNewList(CTileLayoutUI *pList, UINT year, UINT month);
 	void InsertList(CListUI *pList, UINT year, UINT month);
 	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem);
 	LRESULT OnAddListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
