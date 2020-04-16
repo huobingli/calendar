@@ -52,17 +52,17 @@
         <VerticalLayout>
             <!-- <Container width="10" height="162" /> -->
             <List name="1EndDateList" itemtextcolor="#FF000000" itemselectedtextcolor="#FF000000" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" height="30">
-                <ListHeader height="30">
-                    <ListHeaderItem text="日" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="left"/>
-                    <ListHeaderItem text="一" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="left"/>
-                    <ListHeaderItem text="二" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="left"/>
-                    <ListHeaderItem text="三" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="left"/>
-                    <ListHeaderItem text="四" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="left"/>
-                    <ListHeaderItem text="五" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="left"/>
-                    <ListHeaderItem text="六" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="left"/>
+                <ListHeader height="28">
+                    <ListHeaderItem text="日" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="center"/>
+                    <ListHeaderItem text="一" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="center"/>
+                    <ListHeaderItem text="二" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="center"/>
+                    <ListHeaderItem text="三" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="center"/>
+                    <ListHeaderItem text="四" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="center"/>
+                    <ListHeaderItem text="五" width="32" height="24" minwidth="32" textcolor="#FF000000" sepwidth="0" align="center"/>
+                    <ListHeaderItem text="六" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="center"/>
                 </ListHeader>
             </List>
-            <TileLayout name="EndDataList" itemsize="32,20" >
+            <TileLayout name="EndDataList" itemsize="32,24" >
 
             </TileLayout>
         </VerticalLayout>
