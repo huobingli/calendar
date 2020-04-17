@@ -25,6 +25,16 @@ void CCalendarItemUI::DoEvent(DuiLib::TEventUI& event)
 		return;
 	}
 
+	if (event.Type == DuiLib::UIEVENT_BUTTONUP)
+	{
+		int i = 0;
+	}
+
+	if (event.Type == DuiLib::UIEVENT_BUTTONDOWN)
+	{
+		int i = 0;
+	}
+
 	return COptionUI::DoEvent(event);
 }
 
