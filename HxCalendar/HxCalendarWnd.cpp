@@ -85,10 +85,9 @@ void HxCalendarWnd::InitEndTileList()
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CContainerUI* pGameItem = static_cast<CContainerUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback));
-
+			CContainerUI* pGameItem = static_cast<CContainerUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
 			pList->Add(pGameItem);
-			pGameItem->SetText(_T(""));
+			pGameItem->SetEnabled(false);
 		}
 	}
 }
