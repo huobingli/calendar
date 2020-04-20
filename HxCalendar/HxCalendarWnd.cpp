@@ -71,6 +71,27 @@ HxCalendarWnd::~HxCalendarWnd()
 {
 }
 
+void HxCalendarWnd::ResetSelect()
+{
+	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
+	if (pList == NULL)
+	{
+		return;
+	}
+
+	for (UINT i = 0; i < 6; i++)
+	{
+		for (UINT j = 0; j < 7; j++)
+		{
+			COptionUI* pOption = static_cast<COptionUI*>(pList->GetItemAt(7 * i + j));
+			if (pOption)
+			{
+				pOption->Selected(FALSE, FALSE);
+			}
+		}
+	}
+}
+
 void HxCalendarWnd::InitEndTileList()
 {
 	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
@@ -87,9 +108,19 @@ void HxCalendarWnd::InitEndTileList()
 			CDialogBuilder builder;
 			CContainerUI* pGameItem = static_cast<CContainerUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
 			pList->Add(pGameItem);
-			pGameItem->SetEnabled(false);
+			CDuiString str;
+			str.Format(_T("%d"), i * j);
+			//pGameItem->SetTag()
+			pGameItem->SetText(str);
+			
+			
+
+// 			if (i * j == 0)
+// 				pGameItem->SetEnabled(false);
 		}
 	}
+
+	SetEndDateInList(m_CurYear, m_CurMonth);
 }
 
 void HxCalendarWnd::InitWindow()
@@ -110,7 +141,7 @@ void HxCalendarWnd::InitWindow()
 	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
 	if (m_pEndCurentDate)
 		m_pEndCurentDate->SetText(sText);
-	SetEndDateInList(m_CurYear, m_CurMonth);
+	//SetEndDateInList(m_CurYear, m_CurMonth);
 
 	InitEndTileList();
 }
@@ -240,6 +271,11 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
 			m_pEndCurentDate->SetText(sText);
 		}
+
+		if (msg.pSender->GetName() == _T("CalendarItem"))
+		{
+
+		}
 	}
 }
 
@@ -309,6 +345,7 @@ void HxCalendarWnd::SetBeginDateInList(UINT year, UINT month)
 
 void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 {
+	ResetSelect();
 // 	CListUI *pList = static_cast<CListUI*>(m_pm.FindControl("EndDateList"));
 // 	if (pList == NULL)
 // 	{
@@ -318,35 +355,49 @@ void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 // 	pList->RemoveAll();
 // 
 // 	//初始化数组
-// 	for (UINT i = 0; i < 6; i++)
-// 	{
-// 		for (UINT j = 0; j < 7; j++)
-// 		{
-// 			m_Array[i][j] = 0;
-// 		}
-// 	}
-// 	pList->SetTextCallback(this);
-// 	InsertList(pList, year, month);
+	for (UINT i = 0; i < 6; i++)
+	{
+		for (UINT j = 0; j < 7; j++)
+		{
+			m_Array[i][j] = 0;
+		}
+	}
+
+	SetDateInArray(year, month);
 
 	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
 
 	if (pList)
 	{
-//  	for (UINT i = 0; i < 6; i++)
-//  	{
-//  		for (UINT j = 0; j < 7; j++)
-//  		{
-//  			m_Array[i][j] = 0;
-//  		}
-//  	}
-
-// 		CDialogBuilderCallbackEx callback;
-// 		CDialogBuilder builder;
-// 		CContainerUI* pGameItem = static_cast<CContainerUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback));
-
-// 		pList->Add(pGameItem);
-// 		pGameItem->SetText("11");
-		InsertNewList(pList, year, month);
+		for (UINT i = 0; i < 6; i++)
+		{
+			for (UINT j = 0; j < 7; j++)
+			{
+				COptionUI* pOption = static_cast<COptionUI*>(pList->GetItemAt(7 * i + j));
+				if (pOption)
+				{
+					if (m_Array[i][j] == 0)
+					{
+						pOption->SetText(_T(""));
+						pOption->SetEnabled(false);
+					}
+					else if (j == 0 || j == 6)
+					{
+						CDuiString str;
+						str.Format(_T("%d"), m_Array[i][j]);
+						pOption->SetText(str);
+						pOption->SetEnabled(false);
+					}
+					else
+					{
+						CDuiString str;
+						str.Format(_T("%d"), m_Array[i][j]);
+						pOption->SetText(str);
+						pOption->SetEnabled(true);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -399,6 +450,36 @@ void HxCalendarWnd::InsertNewList(CTileLayoutUI *pList, UINT year, UINT month)
 // 		CDuiString str;
 // 		str.Format("%d", m_Array[i]);
 // 		pGameItem->SetText(str);
+	}
+}
+
+void HxCalendarWnd::SetDateInArray(UINT year, UINT month)
+{
+	UINT FirstDay;//该月份的第一天星期几
+	UINT MonthOfDays;//该月的天数
+	MonthOfDays = GetMonthOfDays(year, month);
+	FirstDay = GetWeek(year, month, 1);
+	UINT k = 1;
+
+	for (UINT i = 0; i < 6; i++)
+	{
+		if (0 == i)
+		{
+			for (UINT j = FirstDay; j < 7; j++)
+			{
+				m_Array[i][j] = k;
+				k++;
+			}
+		}
+		else
+		{
+			for (UINT j = 0; j < 7; j++)
+			{
+				if (k > MonthOfDays) break;
+				m_Array[i][j] = k;
+				k++;
+			}
+		}
 	}
 }
 

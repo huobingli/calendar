@@ -32,7 +32,7 @@ public:
 	CControlUI* CreateControl(LPCTSTR pstrClass)
 	{
 //		if (_tcsicmp(pstrClass, _T("GameList")) == 0) return new CGameListUI;
-		if (_tcsicmp(pstrClass, _T("GameItem")) == 0) return new CCalendarItemUI;
+		if (_tcsicmp(pstrClass, _T("CalendarItem")) == 0) return new CCalendarItemUI;
 // 		else if (_tcsicmp(pstrClass, _T("ShortCut")) == 0) return new CShortCutUI;
 // 		else if (_tcsicmp(pstrClass, _T("LabelMutiline")) == 0) return new CLabelMutilineUI;
 		return NULL;
@@ -58,15 +58,20 @@ public:
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 protected:
-	void InitEndTileList();
 	UINT GetMonthOfDays(UINT year, UINT month);
-
 	UINT GetWeek(UINT year, UINT month, UINT day);
 
-	void SetBeginDateInList(UINT year, UINT month);
+	// 初始化日历控件
+	void InitEndTileList();
 	void SetEndDateInList(UINT year, UINT month);
+	void ResetSelect();
+
+	void SetBeginDateInList(UINT year, UINT month);
+	
 	void InsertNewList(CTileLayoutUI *pList, UINT year, UINT month);
 	void InsertList(CListUI *pList, UINT year, UINT month);
+	void SetDateInArray(UINT year, UINT month);
+
 	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem);
 	LRESULT OnAddListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -82,5 +87,8 @@ private:
 	CButtonUI * m_pCloseBtn;
 	CLabelUI * m_pBeginCurentDate;
 	CLabelUI * m_pEndCurentDate;
+
+	DWORD m_dwRow;	// 行 
+	DWORD m_dwCol;	// 列
 };
 
