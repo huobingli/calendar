@@ -2,5 +2,5 @@
 <Window>
 	<Font id="1" name="宋体" size="13"/>
 
-	<CalendarItem name="Calendaritem" height="16" width="24" padding="0,2,0,2" normalimage="file='calendar/button_nor.png' corner='1,1,1,1' fade='200'" hotimage="file='calendar/button_hover.png' corner='1,1,1,1' fade='200'" selectedimage="file='calendar/button_pushed.png' corner='1,1,1,1' fade='200'" align="center" group="gamelist" font="1" textcolor="#FFAAAAAA" />
+	<CalendarItem name="Calendaritem" cursor="hand" height="16" width="24" padding="0,2,0,2" normalimage="file='calendar/button_nor.png' corner='1,1,1,1' fade='200'" hotimage="file='calendar/button_hover.png' corner='1,1,1,1' fade='200'" selectedimage="file='calendar/button_pushed.png' corner='1,1,1,1' fade='200'" align="center" group="gamelist" font="1" textcolor="#FFAAAAAA" />
 </Window>
