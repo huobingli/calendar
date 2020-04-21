@@ -96,14 +96,17 @@ protected:
 
 	// 初始化日历控件
 	void InitEndTileList(int nMode = 0);
-	void SetEndDateInList(UINT year, UINT month, int nMode = 0);
-	void ResetSelect();
-
 	void SetBeginDateInList(UINT year, UINT month);
+	void SetEndDateInList(UINT year, UINT month);
+	
+	// 重置选中状态
+	void ResetBeginSelect();
+	void ResetEndSelect();
 	
 	void InsertNewList(CTileLayoutUI *pList, UINT year, UINT month);
 	void InsertList(CListUI *pList, UINT year, UINT month);
-	void SetDateInArray(UINT year, UINT month);
+	void SetBeginDateInArray(UINT year, UINT month);
+	void SetEndDateInArray(UINT year, UINT month);
 
 	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem);
 	LRESULT OnAddListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -111,9 +114,14 @@ protected:
 	LRESULT OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 private:
-	UINT m_Array[6][7];
-	UINT m_CurYear;
-	UINT m_CurMonth;
+	UINT m_BeginArray[6][7];
+	UINT m_EndArray[6][7];
+
+	UINT m_BeginCurYear;
+	UINT m_BeginCurMonth;
+
+	UINT m_EndCurYear;
+	UINT m_EndCurMonth;
 	//CPaintManagerUI m_pm;
 	SYSTEMTIME m_sysTime;
 

@@ -479,7 +479,7 @@ void HxCalendarWnd::SetBeginDateInList(UINT year, UINT month)
 void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 {
 	// 重置
-	ResetBeginSelect();
+	ResetEndSelect();
 
 	// 	//初始化数组
 	for (UINT i = 0; i < 6; i++)
