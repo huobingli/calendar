@@ -3,9 +3,27 @@
 #include "..\DuiLib\UIlib.h"
 #include "..\DuiLib\Core\UIBase.h"
 
+#include "jsoncpp/json.h"
+
+#include <vector>
+
 #define  WM_ADDLISTITEM  WM_USER+1001
 
+using namespace std;
 using namespace DuiLib;
+
+class MonthCalendar
+{
+public:
+	MonthCalendar();
+	~MonthCalendar();
+
+	void Request();
+	void ParseReturn();
+private:
+	vector<CDuiString> m_vcDays;
+};
+
 
 class CCalendarItemUI : public COptionUI
 {
@@ -33,12 +51,25 @@ public:
 	{
 //		if (_tcsicmp(pstrClass, _T("GameList")) == 0) return new CGameListUI;
 		if (_tcsicmp(pstrClass, _T("CalendarItem")) == 0) return new CCalendarItemUI;
+//		else if (_tcsicmp(pstrClass, _T("HxCalendarUI")) == 0) return new HxCalendarUI;
 // 		else if (_tcsicmp(pstrClass, _T("ShortCut")) == 0) return new CShortCutUI;
 // 		else if (_tcsicmp(pstrClass, _T("LabelMutiline")) == 0) return new CLabelMutilineUI;
 		return NULL;
 	}
 };
 
+
+class HxCalendarUI : public CTileLayoutUI
+{
+public:
+	HxCalendarUI();
+	~HxCalendarUI();
+
+	LPCTSTR GetClass() const { return "HxCalendar"; }
+	PVOID GetInterface(LPCTSTR pstrName);
+
+private:
+};
 
 
 class HxCalendarWnd : public WindowImplBase, public IListCallbackUI
@@ -57,13 +88,15 @@ public:
 	void Notify(TNotifyUI& msg);
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+
+	CControlUI* CreateControl(LPCTSTR pstrClass);
 protected:
 	UINT GetMonthOfDays(UINT year, UINT month);
 	UINT GetWeek(UINT year, UINT month, UINT day);
 
 	// 初始化日历控件
-	void InitEndTileList();
-	void SetEndDateInList(UINT year, UINT month);
+	void InitEndTileList(int nMode = 0);
+	void SetEndDateInList(UINT year, UINT month, int nMode = 0);
 	void ResetSelect();
 
 	void SetBeginDateInList(UINT year, UINT month);

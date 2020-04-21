@@ -1,5 +1,51 @@
 #include "HxCalendarWnd.h"
 
+//////////////////////////////////////////////////////////////////////////
+MonthCalendar::MonthCalendar()
+{
+	m_vcDays.clear();
+}
+
+MonthCalendar::~MonthCalendar()
+{
+
+}
+
+void MonthCalendar::Request()
+{
+
+}
+
+void MonthCalendar::ParseReturn()
+{
+	Json::Reader JsonReader;
+	Json::Value JsonValue;
+
+
+}
+
+//////////////////////////////////////////////////////////////////////////
+HxCalendarUI::HxCalendarUI()
+{
+
+}
+
+HxCalendarUI::~HxCalendarUI()
+{
+
+}
+
+PVOID HxCalendarUI::GetInterface(LPCTSTR pstrName)
+{
+	if (_tcsicmp(pstrName, "HxCalendarUI") == 0)
+	{
+		return static_cast<HxCalendarUI*>(this);
+	}
+
+	return CTileLayoutUI::GetInterface(pstrName);
+}
+
+//////////////////////////////////////////////////////////////////////////
 CCalendarItemUI::CCalendarItemUI()
 {
 }
@@ -61,7 +107,7 @@ void CCalendarItemUI::SetIcon(HICON hIcon)
 }
 
 
-
+//////////////////////////////////////////////////////////////////////////
 HxCalendarWnd::HxCalendarWnd()
 {
 }
@@ -69,6 +115,7 @@ HxCalendarWnd::HxCalendarWnd()
 
 HxCalendarWnd::~HxCalendarWnd()
 {
+
 }
 
 void HxCalendarWnd::ResetSelect()
@@ -92,13 +139,23 @@ void HxCalendarWnd::ResetSelect()
 	}
 }
 
-void HxCalendarWnd::InitEndTileList()
+
+void HxCalendarWnd::InitEndTileList(int nMode)
 {
-	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
+	CDuiString str = "BeginDataList";
+	CDuiString strGroup = "BeginGroup";
+	if (nMode == 0)
+	{
+		str = "EndDataList";
+		strGroup = "EndGroup";
+	}
+
+	HxCalendarUI* pList = static_cast<HxCalendarUI*>(m_pm.FindControl(str));
 	if (pList == NULL)
 	{
 		return ;
 	}
+
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -106,13 +163,13 @@ void HxCalendarWnd::InitEndTileList()
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CContainerUI* pGameItem = static_cast<CContainerUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
-			pList->Add(pGameItem);
+			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
+			pList->Add(pCalendar);
 			CDuiString str;
 			str.Format(_T("%d"), i * j);
 			//pGameItem->SetTag()
-			pGameItem->SetText(str);
-			
+			pCalendar->SetText(str);
+			pCalendar->SetGroup(strGroup);
 			
 
 // 			if (i * j == 0)
@@ -120,7 +177,7 @@ void HxCalendarWnd::InitEndTileList()
 		}
 	}
 
-	SetEndDateInList(m_CurYear, m_CurMonth);
+	SetEndDateInList(m_CurYear, m_CurMonth, nMode);
 }
 
 void HxCalendarWnd::InitWindow()
@@ -136,7 +193,8 @@ void HxCalendarWnd::InitWindow()
 		m_pBeginCurentDate->SetText(sText);
 	m_CurYear = m_sysTime.wYear;
 	m_CurMonth = m_sysTime.wMonth;
-	SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
+	//SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
+	InitEndTileList(1);
 
 	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
 	if (m_pEndCurentDate)
@@ -274,9 +332,19 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 		if (msg.pSender->GetName() == _T("CalendarItem"))
 		{
-
+			int n = 0;
 		}
 	}
+}
+
+CControlUI* HxCalendarWnd::CreateControl(LPCTSTR pstrClass)
+{
+	if (_tcsicmp(pstrClass, "HxCalendarUI") == 0)
+	{
+		return new HxCalendarUI;
+	}
+
+	return WindowImplBase::CreateControl(pstrClass);
 }
 
 LRESULT HxCalendarWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
@@ -343,17 +411,11 @@ void HxCalendarWnd::SetBeginDateInList(UINT year, UINT month)
 	InsertList(pList, year, month);
 }
 
-void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
+void HxCalendarWnd::SetEndDateInList(UINT year, UINT month, int nMode)
 {
+	// 重置
 	ResetSelect();
-// 	CListUI *pList = static_cast<CListUI*>(m_pm.FindControl("EndDateList"));
-// 	if (pList == NULL)
-// 	{
-// 		return;
-// 	}
-// 
-// 	pList->RemoveAll();
-// 
+
 // 	//初始化数组
 	for (UINT i = 0; i < 6; i++)
 	{
@@ -365,7 +427,13 @@ void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 
 	SetDateInArray(year, month);
 
-	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
+	CDuiString str = "BeginDataList";
+	if (nMode == 0)
+	{
+		str = "EndDataList";
+	}
+
+	HxCalendarUI* pList = static_cast<HxCalendarUI*>(m_pm.FindControl(str));
 
 	if (pList)
 	{

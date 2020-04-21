@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- <Window size="530,174" roundcorner="2,2" > -->
-<Window size="775,174" roundcorner="2,2" >
+<Window size="530,174" roundcorner="2,2" >
     <Font id="1" name="宋体" size="14"/>
     <Font id="2" name="Times New Roman" size="14"/>
 
@@ -17,19 +17,17 @@
             <Button name="btn_one_year" text="一年" style="btn_days_style" />
         </VerticalLayout>
 
-        <!-- tests -->
+        <!-- 起始日 -->
         <VerticalLayout width="225" height="174" bkimage="calendar/background.bmp">
             <VerticalLayout height="24">
-                <Button name="btn_end_year_last" text="&lt;&lt;" float="true" pos="26,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Button name="btn_end_month_last" text="&lt;" float="true" pos="46,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Label name="lab_end_year_month" float="true" pos="60,4,0,0" width="100" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" font="1" />
-                <Button name="btn_end_month_next" text="&gt;" float="true" pos="164,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Button name="btn_end_year_next" text="&gt;&gt;" float="true" pos="184,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Button name="btn_monthcal_close" float="true" pos="205,6,0,0" width="16" height="16" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;32,0,48,16&apos;" cursor="hand" />
+                <Button name="btn_begin_year_last" text="&lt;&lt;" float="true" pos="26,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
+                <Button name="btn_begin_month_last" text="&lt;" float="true" pos="46,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
+                <Label name="lab_begin_year_month" float="true" pos="60,4,0,0" width="100" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" font="1" />
+                <Button name="btn_begin_month_next" text="&gt;" float="true" pos="164,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
+                <Button name="btn_begin_year_next" text="&gt;&gt;" float="true" pos="184,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
             </VerticalLayout>
             <VerticalLayout>
-                <!-- <Container width="10" height="162" /> -->
-                <List name="1EndDateList" itemtextcolor="#FFAAAAAB" itemselectedtextcolor="#FFAAAAAB" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" height="24">
+                <List name="BeginDateListHeader" itemtextcolor="#FFAAAAAB" itemselectedtextcolor="#FFAAAAAB" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" height="24">
                     <ListHeader height="24">
                         <ListHeaderItem text="日" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" font="2" align="center"/>
                         <ListHeaderItem text="一" width="32" height="24" minwidth="32" textcolor="#FFAAAAAA" sepwidth="0" font="2" align="center"/>
@@ -40,36 +38,13 @@
                         <ListHeaderItem text="六" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" font="2" align="center"/>
                     </ListHeader>
                 </List>
-                <TileLayout name="EndDataList" itemsize="32,24" childalign="center">
+                <TileLayout name="BeginDataList" itemsize="32,24" childalign="center">
 
                 </TileLayout>
             </VerticalLayout>
         </VerticalLayout>
 
-        <!-- <VerticalLayout width="225" height="174" bkimage="calendar/background.bmp" bordersize="0,0,1,0" bordercolor="#FFCCCCCC">
-            <VerticalLayout height="24">
-                <Button name="btn_begin_year_last" text="&lt;&lt;" float="true" pos="5,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" />
-                <Button name="btn_begin_month_last" text="&lt;" float="true" pos="25,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" />
-                <Label name="lab_begin_year_month" float="true" pos="53,4,0,0" width="95" height="18" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" />
-                <Button name="btn_begin_month_next" text="&gt;" float="true" pos="155,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" />
-                <Button name="btn_begin_year_next" text="&gt;&gt;" float="true" pos="175,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" />
-            </VerticalLayout>
-            <HorizontalLayout>
-                <Container width="10" height="162" />
-                <List name="BeginDateList" itemtextcolor="#FFAAAAAB" itemselectedtextcolor="#FFAAAAAB" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF">
-                    <ListHeader height="30">
-                        <ListHeaderItem text="日" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="一" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="二" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="三" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="四" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="五" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="六" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="left"/>
-                    </ListHeader>
-                </List>
-            </HorizontalLayout>
-        </VerticalLayout> -->
-
+        <!-- 结束日 -->
         <VerticalLayout width="225" height="174" bkimage="calendar/background.bmp">
             <VerticalLayout height="24">
                 <Button name="btn_end_year_last" text="&lt;&lt;" float="true" pos="26,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
@@ -80,8 +55,7 @@
                 <Button name="btn_monthcal_close" float="true" pos="205,6,0,0" width="16" height="16" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;32,0,48,16&apos;" cursor="hand" />
             </VerticalLayout>
             <VerticalLayout>
-                <!-- <Container width="10" height="162" /> -->
-                <List name="1EndDateList" itemtextcolor="#FFAAAAAB" itemselectedtextcolor="#FFAAAAAB" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" height="24">
+                <List name="EndDateListHeader" itemtextcolor="#FFAAAAAB" itemselectedtextcolor="#FFAAAAAB" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF" height="24">
                     <ListHeader height="24">
                         <ListHeaderItem text="日" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" font="2" align="center"/>
                         <ListHeaderItem text="一" width="32" height="24" minwidth="32" textcolor="#FFAAAAAA" sepwidth="0" font="2" align="center"/>
@@ -92,34 +66,10 @@
                         <ListHeaderItem text="六" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" font="2" align="center"/>
                     </ListHeader>
                 </List>
-                <TileLayout name="EndDataList" itemsize="32,24" childalign="center">
+                <HxCalendarUI name="EndDataList" itemsize="32,24" childalign="center">
 
-                </TileLayout>
+                </HxCalendarUI>
             </VerticalLayout>
-        </VerticalLayout>
-
-        <VerticalLayout width="225" height="174" bkimage="calendar/background.bmp" bordersize="0,0,1,0" bordercolor="#FFCCCCCC">
-            <VerticalLayout height="24">
-                <Button name="btn_begin_year_last" text="&lt;&lt;" float="true" pos="5,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Button name="btn_begin_month_last" text="&lt;" float="true" pos="25,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Label name="lab_begin_year_month" float="true" pos="53,4,0,0" width="95" height="18" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" />
-                <Button name="btn_begin_month_next" text="&gt;" float="true" pos="155,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Button name="btn_begin_year_next" text="&gt;&gt;" float="true" pos="175,4,0,0" width="16" height="16" textcolor="#FFAAAAAB" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-            </VerticalLayout>
-            <HorizontalLayout>
-                <Container width="10" height="162" />
-                <List name="BeginDateList" itemtextcolor="#FFAAAAAB" itemselectedtextcolor="#FFAAAAAB" itemselectedbkcolor="#000000" itemhottextcolor="#00000000" itemhotbkcolor="#00000000" itemdisabledtextcolor="#FFCCCCCC" itemdisabledbkcolor="#FFFFFFFF">
-                    <ListHeader height="30">
-                        <ListHeaderItem text="日" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="一" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="二" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="三" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="四" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="五" width="32" height="24" minwidth="32" textcolor="#FFAAAAAB" sepwidth="0" align="left"/>
-                        <ListHeaderItem text="六" width="32" height="24" minwidth="32" textcolor="#00FF5780" sepwidth="0" align="left"/>
-                    </ListHeader>
-                </List>
-            </HorizontalLayout>
         </VerticalLayout>
     </HorizontalLayout>
 </Window>
