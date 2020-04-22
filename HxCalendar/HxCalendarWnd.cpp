@@ -245,6 +245,16 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 	if (msg.sType == DUI_MSGTYPE_CLICK)
 	{
+		if (strName.CompareNoCase(_T("lab_begin_year_month")) == 0)
+		{
+			
+		}
+
+		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
+		{
+			CDuiString str = msg.pSender->GetText();
+		}
+
 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
 		{
 			Close(IDCANCEL);
