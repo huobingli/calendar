@@ -189,7 +189,7 @@ void HxCalendarWnd::InitEndTileList(int nMode)
 			str.Format(_T("%d"), i * j);
 			//pGameItem->SetTag()
 			pCalendar->SetText(str);
-			pCalendar->SetGroup(strGroup);
+			//pCalendar->SetGroup(strGroup);
 		}
 	}
 }
@@ -247,7 +247,7 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 	{
 		if (strName.CompareNoCase(_T("lab_begin_year_month")) == 0)
 		{
-			
+			int n = 0;
 		}
 
 		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
@@ -394,17 +394,6 @@ CControlUI* HxCalendarWnd::CreateControl(LPCTSTR pstrClass)
 
 LRESULT HxCalendarWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-// 	LRESULT lRes;
-// 	switch (uMsg)
-// 	{
-// 	case WM_CREATE:
-// 		lRes = OnCreate(uMsg, wParam, lParam, bHandled);
-// 		break;
-// 	default:
-// 		bHandled = FALSE;
-// 	}
-// 
-// 	if (bHandled) return lRes;
 	return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
 }
 

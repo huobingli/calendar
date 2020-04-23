@@ -22,7 +22,7 @@
             <VerticalLayout height="24">
                 <Button name="btn_begin_year_last" text="&lt;&lt;" float="true" pos="26,2,0,0" width="16" height="24" textcolor="#FF666666" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
                 <Button name="btn_begin_month_last" text="&lt;" float="true" pos="46,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Label name="lab_begin_year_month" float="true" pos="60,4,0,0" width="100" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" font="1" />
+                <Button name="lab_begin_year_month" float="true" pos="60,4,0,0" width="100" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" font="1" />
                 <Button name="btn_begin_month_next" text="&gt;" float="true" pos="164,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
                 <Button name="btn_begin_year_next" text="&gt;&gt;" float="true" pos="184,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
             </VerticalLayout>
@@ -48,7 +48,7 @@
             <VerticalLayout height="24">
                 <Button name="btn_end_year_last" text="&lt;&lt;" float="true" pos="26,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
                 <Button name="btn_end_month_last" text="&lt;" float="true" pos="46,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
-                <Label name="lab_end_year_month" float="true" pos="60,4,0,0" width="100" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" font="1" />
+                <Button name="lab_end_year_month" float="true" pos="60,4,0,0" width="100" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" font="1" />
                 <Button name="btn_end_month_next" text="&gt;" float="true" pos="164,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
                 <Button name="btn_end_year_next" text="&gt;&gt;" float="true" pos="184,2,0,0" width="16" height="24" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" cursor="hand" />
                 <Button name="btn_monthcal_close" float="true" pos="205,6,0,0" width="16" height="16" textcolor="#FFAAAAAA" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;calendar/login_form_close_button.png&apos; source=&apos;32,0,48,16&apos;" cursor="hand" />
