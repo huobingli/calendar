@@ -189,7 +189,7 @@ void HxCalendarWnd::InitEndTileList(int nMode)
 			str.Format(_T("%d"), i * j);
 			//pGameItem->SetTag()
 			pCalendar->SetText(str);
-			pCalendar->SetGroup(strGroup);
+			//pCalendar->SetGroup(strGroup);
 		}
 	}
 }
