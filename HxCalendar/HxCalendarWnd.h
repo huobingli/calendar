@@ -3,9 +3,27 @@
 #include "..\DuiLib\UIlib.h"
 #include "..\DuiLib\Core\UIBase.h"
 
+#include "jsoncpp/json.h"
+
+#include <vector>
+
 #define  WM_ADDLISTITEM  WM_USER+1001
 
+using namespace std;
 using namespace DuiLib;
+
+class MonthCalendar
+{
+public:
+	MonthCalendar();
+	~MonthCalendar();
+
+	void Request();
+	void ParseReturn();
+private:
+	vector<CDuiString> m_vcDays;
+};
+
 
 class CCalendarItemUI : public COptionUI
 {
@@ -33,12 +51,25 @@ public:
 	{
 //		if (_tcsicmp(pstrClass, _T("GameList")) == 0) return new CGameListUI;
 		if (_tcsicmp(pstrClass, _T("CalendarItem")) == 0) return new CCalendarItemUI;
+//		else if (_tcsicmp(pstrClass, _T("HxCalendarUI")) == 0) return new HxCalendarUI;
 // 		else if (_tcsicmp(pstrClass, _T("ShortCut")) == 0) return new CShortCutUI;
 // 		else if (_tcsicmp(pstrClass, _T("LabelMutiline")) == 0) return new CLabelMutilineUI;
 		return NULL;
 	}
 };
 
+
+class HxCalendarUI : public CTileLayoutUI
+{
+public:
+	HxCalendarUI();
+	~HxCalendarUI();
+
+	LPCTSTR GetClass() const { return "HxCalendar"; }
+	PVOID GetInterface(LPCTSTR pstrName);
+
+private:
+};
 
 
 class HxCalendarWnd : public WindowImplBase, public IListCallbackUI
@@ -57,20 +88,25 @@ public:
 	void Notify(TNotifyUI& msg);
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+
+	CControlUI* CreateControl(LPCTSTR pstrClass);
 protected:
 	UINT GetMonthOfDays(UINT year, UINT month);
 	UINT GetWeek(UINT year, UINT month, UINT day);
 
 	// 初始化日历控件
-	void InitEndTileList();
-	void SetEndDateInList(UINT year, UINT month);
-	void ResetSelect();
-
+	void InitEndTileList(int nMode = 0);
 	void SetBeginDateInList(UINT year, UINT month);
+	void SetEndDateInList(UINT year, UINT month);
+	
+	// 重置选中状态
+	void ResetBeginSelect();
+	void ResetEndSelect();
 	
 	void InsertNewList(CTileLayoutUI *pList, UINT year, UINT month);
 	void InsertList(CListUI *pList, UINT year, UINT month);
-	void SetDateInArray(UINT year, UINT month);
+	void SetBeginDateInArray(UINT year, UINT month);
+	void SetEndDateInArray(UINT year, UINT month);
 
 	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem);
 	LRESULT OnAddListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -78,9 +114,14 @@ protected:
 	LRESULT OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 private:
-	UINT m_Array[6][7];
-	UINT m_CurYear;
-	UINT m_CurMonth;
+	UINT m_BeginArray[6][7];
+	UINT m_EndArray[6][7];
+
+	UINT m_BeginCurYear;
+	UINT m_BeginCurMonth;
+
+	UINT m_EndCurYear;
+	UINT m_EndCurMonth;
 	//CPaintManagerUI m_pm;
 	SYSTEMTIME m_sysTime;
 
