@@ -1,5 +1,51 @@
 #include "HxCalendarWnd.h"
 
+//////////////////////////////////////////////////////////////////////////
+MonthCalendar::MonthCalendar()
+{
+	//m_vcDays.clear();
+}
+
+MonthCalendar::~MonthCalendar()
+{
+
+}
+
+void MonthCalendar::Request()
+{
+
+}
+
+void MonthCalendar::ParseReturn()
+{
+	Json::Reader JsonReader;
+	Json::Value JsonValue;
+
+
+}
+
+//////////////////////////////////////////////////////////////////////////
+HxCalendarUI::HxCalendarUI()
+{
+
+}
+
+HxCalendarUI::~HxCalendarUI()
+{
+
+}
+
+PVOID HxCalendarUI::GetInterface(LPCTSTR pstrName)
+{
+	if (_tcsicmp(pstrName, "HxCalendarUI") == 0)
+	{
+		return static_cast<HxCalendarUI*>(this);
+	}
+
+	return CTileLayoutUI::GetInterface(pstrName);
+}
+
+//////////////////////////////////////////////////////////////////////////
 CCalendarItemUI::CCalendarItemUI()
 {
 }
@@ -61,7 +107,7 @@ void CCalendarItemUI::SetIcon(HICON hIcon)
 }
 
 
-
+//////////////////////////////////////////////////////////////////////////
 HxCalendarWnd::HxCalendarWnd()
 {
 }
@@ -69,9 +115,10 @@ HxCalendarWnd::HxCalendarWnd()
 
 HxCalendarWnd::~HxCalendarWnd()
 {
+
 }
 
-void HxCalendarWnd::ResetSelect()
+void HxCalendarWnd::ResetEndSelect()
 {
 	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
 	if (pList == NULL)
@@ -92,9 +139,39 @@ void HxCalendarWnd::ResetSelect()
 	}
 }
 
-void HxCalendarWnd::InitEndTileList()
+void HxCalendarWnd::ResetBeginSelect()
 {
-	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
+	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("BeginDataList"));
+	if (pList == NULL)
+	{
+		return;
+	}
+
+	for (UINT i = 0; i < 6; i++)
+	{
+		for (UINT j = 0; j < 7; j++)
+		{
+			COptionUI* pOption = static_cast<COptionUI*>(pList->GetItemAt(7 * i + j));
+			if (pOption)
+			{
+				pOption->Selected(FALSE, FALSE);
+			}
+		}
+	}
+}
+
+
+void HxCalendarWnd::InitEndTileList(int nMode)
+{
+	CDuiString str = "BeginDataList";
+	CDuiString strGroup = "BeginGroup";
+	if (nMode == 0)
+	{
+		str = "EndDataList";
+		strGroup = "EndGroup";
+	}
+
+	HxCalendarUI* pList = static_cast<HxCalendarUI*>(m_pm.FindControl(str));
 	if (pList == NULL)
 	{
 		return ;
@@ -106,21 +183,15 @@ void HxCalendarWnd::InitEndTileList()
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CContainerUI* pGameItem = static_cast<CContainerUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
-			pList->Add(pGameItem);
+			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
+			pList->Add(pCalendar);
 			CDuiString str;
 			str.Format(_T("%d"), i * j);
 			//pGameItem->SetTag()
-			pGameItem->SetText(str);
-			
-			
-
-// 			if (i * j == 0)
-// 				pGameItem->SetEnabled(false);
+			pCalendar->SetText(str);
+			//pCalendar->SetGroup(strGroup);
 		}
 	}
-
-	SetEndDateInList(m_CurYear, m_CurMonth);
 }
 
 void HxCalendarWnd::InitWindow()
@@ -129,21 +200,43 @@ void HxCalendarWnd::InitWindow()
 	m_pBeginCurentDate = static_cast<CLabelUI*>(m_pm.FindControl(_T("lab_begin_year_month")));
 	m_pEndCurentDate = static_cast<CLabelUI*>(m_pm.FindControl(_T("lab_end_year_month")));
 
+	// 获取当前时间 设置到
 	::GetLocalTime(&m_sysTime);
-	CDuiString sText;
-	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
-	if (m_pBeginCurentDate)
-		m_pBeginCurentDate->SetText(sText);
-	m_CurYear = m_sysTime.wYear;
-	m_CurMonth = m_sysTime.wMonth;
-	SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
 
-	sText.SmallFormat(_T("%4d-%02d"), m_sysTime.wYear, m_sysTime.wMonth);
+	// 设置当前时间
+	m_EndCurYear = m_sysTime.wYear;
+	m_EndCurMonth = m_sysTime.wMonth;
+	
+	
+
+	CDuiString sText;
+	// 设置结束时间
+	sText.SmallFormat(_T("%4d-%02d"), m_EndCurYear, m_EndCurMonth);
 	if (m_pEndCurentDate)
 		m_pEndCurentDate->SetText(sText);
-	//SetEndDateInList(m_CurYear, m_CurMonth);
+	InitEndTileList(0);
+	SetEndDateInList(m_EndCurYear, m_EndCurMonth);
 
-	InitEndTileList();
+	// 设置开始时间
+	m_BeginCurMonth = m_EndCurMonth;
+	m_BeginCurYear = m_EndCurYear;
+	if (m_EndCurMonth == 1)
+	{
+		m_BeginCurMonth = 12;
+		--m_BeginCurYear;
+	}
+	else
+	{
+		--m_BeginCurMonth;
+	}
+
+	sText.SmallFormat(_T("%4d-%02d"), m_BeginCurYear, m_BeginCurMonth);
+	if (m_pBeginCurentDate)
+		m_pBeginCurentDate->SetText(sText);
+	
+	//SetBeginDateInList(/*m_sysTime.wYear,m_sysTime.wMonth*/m_CurYear, m_CurMonth);
+	InitEndTileList(1);
+	SetBeginDateInList(m_BeginCurYear, m_BeginCurMonth);
 }
 
 void HxCalendarWnd::Notify(TNotifyUI& msg)
@@ -152,6 +245,16 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 	if (msg.sType == DUI_MSGTYPE_CLICK)
 	{
+		if (strName.CompareNoCase(_T("lab_begin_year_month")) == 0)
+		{
+			int n = 0;
+		}
+
+		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
+		{
+			CDuiString str = msg.pSender->GetText();
+		}
+
 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
 		{
 			Close(IDCANCEL);
@@ -161,56 +264,56 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 		if (msg.pSender->GetName() == _T("btn_begin_month_next"))
 		{
 			CDuiString sText;
-			UINT SelMonth = m_CurMonth % 12;
+			UINT SelMonth = m_BeginCurMonth % 12;
 			if (SelMonth == 0)
 			{
 				//SetDateInList(m_CurYear+1,SelMonth+1);
-				++m_CurYear;
-				m_CurMonth -= 11;
+				++m_BeginCurYear;
+				m_BeginCurMonth -= 11;
 			}
 			else
 			{
 				//SetDateInList(m_CurYear,SelMonth+1);
-				++m_CurMonth;
+				++m_BeginCurMonth;
 			}
-			SetBeginDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			SetBeginDateInList(m_BeginCurYear, m_BeginCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_BeginCurYear, m_BeginCurMonth);
 			m_pBeginCurentDate->SetText(sText);
 		}
 		//单击上个月份
 		if (msg.pSender->GetName() == _T("btn_begin_month_last"))
 		{
 			CDuiString sText;
-			UINT SelMonth = m_CurMonth % 12;
+			UINT SelMonth = m_BeginCurMonth % 12;
 			if (SelMonth == 1)
 			{
-				--m_CurYear;
-				m_CurMonth += 11;
+				--m_BeginCurYear;
+				m_BeginCurMonth += 11;
 			}
 			else
 			{
-				--m_CurMonth;
+				--m_BeginCurMonth;
 			}
-			SetBeginDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			SetBeginDateInList(m_BeginCurYear, m_BeginCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_BeginCurYear, m_BeginCurMonth);
 			m_pBeginCurentDate->SetText(sText);
 		}
 		//单击下一年份
 		if (msg.pSender->GetName() == _T("btn_begin_year_next"))
 		{
 			CDuiString sText;
-			++m_CurYear;
-			SetBeginDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			++m_BeginCurYear;
+			SetBeginDateInList(m_BeginCurYear, m_BeginCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_BeginCurYear, m_BeginCurMonth);
 			m_pBeginCurentDate->SetText(sText);
 		}
 		//单击上一年份
 		if (msg.pSender->GetName() == _T("btn_begin_year_last"))
 		{
 			CDuiString sText;
-			--m_CurYear;
-			SetBeginDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			--m_BeginCurYear;
+			SetBeginDateInList(m_BeginCurYear, m_BeginCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_BeginCurYear, m_BeginCurMonth);
 			m_pBeginCurentDate->SetText(sText);
 		}
 
@@ -219,79 +322,78 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 		if (msg.pSender->GetName() == _T("btn_end_month_next"))
 		{
 			CDuiString sText;
-			UINT SelMonth = m_CurMonth % 12;
+			UINT SelMonth = m_EndCurMonth % 12;
 			if (SelMonth == 0)
 			{
 				//SetDateInList(m_CurYear+1,SelMonth+1);
-				++m_CurYear;
-				m_CurMonth -= 11;
+				++m_EndCurYear;
+				m_EndCurMonth -= 11;
 			}
 			else
 			{
 				//SetDateInList(m_CurYear,SelMonth+1);
-				++m_CurMonth;
+				++m_EndCurMonth;
 			}
-			SetEndDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			SetEndDateInList(m_EndCurYear, m_EndCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_EndCurYear, m_EndCurMonth);
 			m_pEndCurentDate->SetText(sText);
 		}
 		//单击上个月份
 		if (msg.pSender->GetName() == _T("btn_end_month_last"))
 		{
 			CDuiString sText;
-			UINT SelMonth = m_CurMonth % 12;
+			UINT SelMonth = m_EndCurMonth % 12;
 			if (SelMonth == 1)
 			{
-				--m_CurYear;
-				m_CurMonth += 11;
+				--m_EndCurYear;
+				m_EndCurMonth += 11;
 			}
 			else
 			{
-				--m_CurMonth;
+				--m_EndCurMonth;
 			}
-			SetEndDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			SetEndDateInList(m_EndCurYear, m_EndCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_EndCurYear, m_EndCurMonth);
 			m_pEndCurentDate->SetText(sText);
 		}
 		//单击下一年份
 		if (msg.pSender->GetName() == _T("btn_end_year_next"))
 		{
 			CDuiString sText;
-			++m_CurYear;
-			SetEndDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			++m_EndCurYear;
+			SetEndDateInList(m_EndCurYear, m_EndCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_EndCurYear, m_EndCurMonth);
 			m_pEndCurentDate->SetText(sText);
 		}
 		//单击上一年份
 		if (msg.pSender->GetName() == _T("btn_end_year_last"))
 		{
 			CDuiString sText;
-			--m_CurYear;
-			SetEndDateInList(m_CurYear, m_CurMonth);
-			sText.SmallFormat(_T("%4d-%02d"), m_CurYear, m_CurMonth);
+			--m_EndCurYear;
+			SetEndDateInList(m_EndCurYear, m_EndCurMonth);
+			sText.SmallFormat(_T("%4d-%02d"), m_EndCurYear, m_EndCurMonth);
 			m_pEndCurentDate->SetText(sText);
 		}
 
 		if (msg.pSender->GetName() == _T("CalendarItem"))
 		{
-
+			int n = 0;
 		}
 	}
 }
 
+CControlUI* HxCalendarWnd::CreateControl(LPCTSTR pstrClass)
+{
+	if (_tcsicmp(pstrClass, "HxCalendarUI") == 0)
+	{
+		return new HxCalendarUI;
+	}
+
+	return WindowImplBase::CreateControl(pstrClass);
+}
+
 LRESULT HxCalendarWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-// 	LRESULT lRes;
-// 	switch (uMsg)
-// 	{
-// 	case WM_CREATE:
-// 		lRes = OnCreate(uMsg, wParam, lParam, bHandled);
-// 		break;
-// 	default:
-// 		bHandled = FALSE;
-// 	}
-// 
-// 	if (bHandled) return lRes;
 	return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
 }
 
@@ -323,49 +425,21 @@ UINT HxCalendarWnd::GetWeek(UINT year, UINT month, UINT day)
 
 void HxCalendarWnd::SetBeginDateInList(UINT year, UINT month)
 {
-	CListUI *pList = static_cast<CListUI*>(m_pm.FindControl("BeginDateList"));
-	if (pList == NULL)
-	{
-		return;
-	}
+	// 重置
+	ResetBeginSelect();
 
-	pList->RemoveAll();
-
-	//初始化数组
+	// 	//初始化数组
 	for (UINT i = 0; i < 6; i++)
 	{
 		for (UINT j = 0; j < 7; j++)
 		{
-			m_Array[i][j] = 0;
-		}
-	}
-	pList->SetTextCallback(this);
-	InsertList(pList, year, month);
-}
-
-void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
-{
-	ResetSelect();
-// 	CListUI *pList = static_cast<CListUI*>(m_pm.FindControl("EndDateList"));
-// 	if (pList == NULL)
-// 	{
-// 		return;
-// 	}
-// 
-// 	pList->RemoveAll();
-// 
-// 	//初始化数组
-	for (UINT i = 0; i < 6; i++)
-	{
-		for (UINT j = 0; j < 7; j++)
-		{
-			m_Array[i][j] = 0;
+			m_BeginArray[i][j] = 0;
 		}
 	}
 
-	SetDateInArray(year, month);
+	SetBeginDateInArray(year, month);
 
-	CTileLayoutUI* pList = static_cast<CTileLayoutUI*>(m_pm.FindControl("EndDataList"));
+	HxCalendarUI* pList = static_cast<HxCalendarUI*>(m_pm.FindControl("BeginDataList"));
 
 	if (pList)
 	{
@@ -376,7 +450,7 @@ void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 				COptionUI* pOption = static_cast<COptionUI*>(pList->GetItemAt(7 * i + j));
 				if (pOption)
 				{
-					if (m_Array[i][j] == 0)
+					if (m_BeginArray[i][j] == 0)
 					{
 						pOption->SetText(_T(""));
 						pOption->SetEnabled(false);
@@ -384,14 +458,66 @@ void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
 					else if (j == 0 || j == 6)
 					{
 						CDuiString str;
-						str.Format(_T("%d"), m_Array[i][j]);
+						str.Format(_T("%d"), m_BeginArray[i][j]);
 						pOption->SetText(str);
 						pOption->SetEnabled(false);
 					}
 					else
 					{
 						CDuiString str;
-						str.Format(_T("%d"), m_Array[i][j]);
+						str.Format(_T("%d"), m_BeginArray[i][j]);
+						pOption->SetText(str);
+						pOption->SetEnabled(true);
+					}
+				}
+			}
+		}
+	}
+}
+
+void HxCalendarWnd::SetEndDateInList(UINT year, UINT month)
+{
+	// 重置
+	ResetBeginSelect();
+
+	// 	//初始化数组
+	for (UINT i = 0; i < 6; i++)
+	{
+		for (UINT j = 0; j < 7; j++)
+		{
+			m_EndArray[i][j] = 0;
+		}
+	}
+
+	SetEndDateInArray(year, month);
+
+	HxCalendarUI* pList = static_cast<HxCalendarUI*>(m_pm.FindControl("EndDataList"));
+
+	if (pList)
+	{
+		for (UINT i = 0; i < 6; i++)
+		{
+			for (UINT j = 0; j < 7; j++)
+			{
+				COptionUI* pOption = static_cast<COptionUI*>(pList->GetItemAt(7 * i + j));
+				if (pOption)
+				{
+					if (m_EndArray[i][j] == 0)
+					{
+						pOption->SetText(_T(""));
+						pOption->SetEnabled(false);
+					}
+					else if (j == 0 || j == 6)
+					{
+						CDuiString str;
+						str.Format(_T("%d"), m_EndArray[i][j]);
+						pOption->SetText(str);
+						pOption->SetEnabled(false);
+					}
+					else
+					{
+						CDuiString str;
+						str.Format(_T("%d"), m_EndArray[i][j]);
 						pOption->SetText(str);
 						pOption->SetEnabled(true);
 					}
@@ -415,7 +541,7 @@ void HxCalendarWnd::InsertNewList(CTileLayoutUI *pList, UINT year, UINT month)
 		{
 			for (UINT j = FirstDay; j < 7; j++)
 			{
-				m_Array[i][j] = k;
+				//m_Array[i][j] = k;
 				k++;
 			}
 		}
@@ -424,7 +550,7 @@ void HxCalendarWnd::InsertNewList(CTileLayoutUI *pList, UINT year, UINT month)
 			for (UINT j = 0; j < 7; j++)
 			{
 				if (k > MonthOfDays) break;
-				m_Array[i][j] = k;
+				//m_Array[i][j] = k;
 				k++;
 			}
 		}
@@ -453,7 +579,7 @@ void HxCalendarWnd::InsertNewList(CTileLayoutUI *pList, UINT year, UINT month)
 	}
 }
 
-void HxCalendarWnd::SetDateInArray(UINT year, UINT month)
+void HxCalendarWnd::SetBeginDateInArray(UINT year, UINT month)
 {
 	UINT FirstDay;//该月份的第一天星期几
 	UINT MonthOfDays;//该月的天数
@@ -467,7 +593,7 @@ void HxCalendarWnd::SetDateInArray(UINT year, UINT month)
 		{
 			for (UINT j = FirstDay; j < 7; j++)
 			{
-				m_Array[i][j] = k;
+				m_BeginArray[i][j] = k;
 				k++;
 			}
 		}
@@ -476,7 +602,37 @@ void HxCalendarWnd::SetDateInArray(UINT year, UINT month)
 			for (UINT j = 0; j < 7; j++)
 			{
 				if (k > MonthOfDays) break;
-				m_Array[i][j] = k;
+				m_BeginArray[i][j] = k;
+				k++;
+			}
+		}
+	}
+}
+
+void HxCalendarWnd::SetEndDateInArray(UINT year, UINT month)
+{
+	UINT FirstDay;//该月份的第一天星期几
+	UINT MonthOfDays;//该月的天数
+	MonthOfDays = GetMonthOfDays(year, month);
+	FirstDay = GetWeek(year, month, 1);
+	UINT k = 1;
+
+	for (UINT i = 0; i < 6; i++)
+	{
+		if (0 == i)
+		{
+			for (UINT j = FirstDay; j < 7; j++)
+			{
+				m_EndArray[i][j] = k;
+				k++;
+			}
+		}
+		else
+		{
+			for (UINT j = 0; j < 7; j++)
+			{
+				if (k > MonthOfDays) break;
+				m_EndArray[i][j] = k;
 				k++;
 			}
 		}
@@ -497,7 +653,7 @@ void HxCalendarWnd::InsertList(CListUI *pList, UINT year, UINT month)
 		{
 			for (UINT j = FirstDay; j < 7; j++)
 			{
-				m_Array[i][j] = k;
+				//m_Array[i][j] = k;
 				k++;
 			}
 		}
@@ -506,7 +662,7 @@ void HxCalendarWnd::InsertList(CListUI *pList, UINT year, UINT month)
 			for (UINT j = 0; j < 7; j++)
 			{
 				if (k > MonthOfDays) break;
-				m_Array[i][j] = k;
+				//m_Array[i][j] = k;
 				k++;
 			}
 		}
@@ -536,7 +692,7 @@ LPCTSTR HxCalendarWnd::GetItemText(CControlUI* pControl, int iIndex, int iSubIte
 {
 	TCHAR szBuf[MAX_PATH] = { 0 };
 	CDuiString sText;
-	sText.SmallFormat(_T("%d"), m_Array[iIndex][iSubItem]);
+	//sText.SmallFormat(_T("%d"), m_Array[iIndex][iSubItem]);
 	if (sText == "0")
 	{
 		sText = "";
