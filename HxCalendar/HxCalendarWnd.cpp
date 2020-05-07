@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 MonthCalendar::MonthCalendar()
 {
-	m_vcDays.clear();
+	//m_vcDays.clear();
 }
 
 MonthCalendar::~MonthCalendar()
@@ -245,6 +245,16 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 	if (msg.sType == DUI_MSGTYPE_CLICK)
 	{
+		if (strName.CompareNoCase(_T("lab_begin_year_month")) == 0)
+		{
+			int n = 0;
+		}
+
+		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
+		{
+			CDuiString str = msg.pSender->GetText();
+		}
+
 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
 		{
 			Close(IDCANCEL);
@@ -384,17 +394,6 @@ CControlUI* HxCalendarWnd::CreateControl(LPCTSTR pstrClass)
 
 LRESULT HxCalendarWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-// 	LRESULT lRes;
-// 	switch (uMsg)
-// 	{
-// 	case WM_CREATE:
-// 		lRes = OnCreate(uMsg, wParam, lParam, bHandled);
-// 		break;
-// 	default:
-// 		bHandled = FALSE;
-// 	}
-// 
-// 	if (bHandled) return lRes;
 	return WindowImplBase::HandleMessage(uMsg, wParam, lParam);
 }
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,32" size="339,80"  roundcorner="3,3" >
+  <Font id="0" name="宋体" size="12" default="true"/>
+  <Font id="1" name="宋体" size="14"/>
+
+   <Style name="close_btn_style" value="width=&quot;9&quot; height=&quot;9&quot; cursor=&quot;hand&quot; normalimage=&quot;file='sysbtn/close_normal.png'&quot; hotimage=&quot;file='sysbtn/close_hover.png'&quot; pushedimage=&quot;file='sysbtn/close_hover.png'&quot;" />
+   <Style name="confirm_btn_style" value="bkcolor=&quot;#FF479ef6&quot; cursor=&quot;hand&quot; pushedbkcolor=&quot;#FF3a84ce&quot; borderround=&quot;3,3&quot; textcolor=&quot;#ffffffff&quot; font=&quot;1&quot;  bordersize=&quot;1,1,1,1&quot; bordercolor=&quot;#FF479ef6&quot; focusbordercolor=&quot;#ff3a84ce&quot;" />
+   <Style name="cancel_btn_style" value="bkcolor=&quot;#FFFFFFFF&quot; cursor=&quot;hand&quot; pushedbkcolor=&quot;#FFf5f5f7&quot; borderround=&quot;3,3&quot; textcolor=&quot;#ff4e4e4f&quot; font=&quot;1&quot; bordersize=&quot;1,1,1,1&quot; bordercolor=&quot;#FFd6d8dc&quot;" />
+ 
+ 
+  <VerticalLayout bkcolor="#FFfafafa" bordercolor="#FF52555A" bordersize="1,1,1,1" >
+    <HorizontalLayout name="appbar" height="36" inset="10,10,12,12" bkcolor="#FF52555A">
+        <Label name="labelTitle" valign="vcenter" text="开启日历" textcolor="#FFd9d9d9" font="0" />
+        <Button name="closebtn" style="close_btn_style" cussor="hand" tooltip="关闭" />
+    </HorizontalLayout>
+    <HorizontalLayout height="42" childpadding="8" inset="20,10,20,5">
+      <Button name="calendar" text="日历" width="70" height="28" font="1" style="confirm_btn_style"/>
+      <Button name="cancel_btn"  text="取消" width="70" height="28"  font="1" style="cancel_btn_style" padding="16" />
+    </HorizontalLayout>
+  </VerticalLayout>
+</Window>
