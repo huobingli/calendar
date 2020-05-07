@@ -131,5 +131,7 @@ private:
 
 	DWORD m_dwRow;	// ÐÐ 
 	DWORD m_dwCol;	// ÁÐ
+
+
 };
 
