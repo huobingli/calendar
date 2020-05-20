@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <objbase.h>
 #include <ATLComTime.h>
+#include "CHxTableList.h"
 
 #ifdef _DEBUG
 #ifdef _UNICODE
@@ -23,9 +24,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
 
 
-// 	HxCalendarWnd *pFrame = new HxCalendarWnd;
-// 	pFrame->CreateDuiWindow(NULL, _T("日历测试"), UI_WNDSTYLE_DIALOG, 0L);
-// 	pFrame->CenterWindow();
+	CHxTableListWnd *pFrame = new CHxTableListWnd;
+	pFrame->CreateDuiWindow(NULL, _T("日历测试"), UI_WNDSTYLE_DIALOG, 0L);
+	pFrame->CenterWindow();
 
 	CPaintManagerUI::MessageLoop();
 	::CoUninitialize();
