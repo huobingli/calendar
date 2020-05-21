@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+	<Font id="0" name="宋体" size="14" default="true" />
+	<Font id="1" name="宋体" size="14" />
+	<Font id="2" name="宋体" size="14" bold="true" />
+	<Font id="3" name="宋体" size="15" bold="true"/>
+	<Font id="4" name="svgasys" size="16" />
+	<Style name="label_style" value="bordersize=&quot;0,1,0,1&quot; bordercolor=&quot;#FFCCCCCC&quot; itemhottextcolor=&quot;#FF182218&quot;" />
+		
+	<ListContainerElement height="32" >
+		<Label name="showtext" font="4" textcolor="#FFFFD764" />
+	</ListContainerElement>
+</Window>

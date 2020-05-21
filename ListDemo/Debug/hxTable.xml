@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Window size="500,500" caption="0,0,0,30">
+	<Font id="0" name="宋体" size="14" default="true" />
+	<Font id="1" name="宋体" size="14" />
+	<Font id="2" name="宋体" size="14" bold="true" />
+	<Font id="3" name="宋体" size="15" bold="true"/>
+	<Font id="4" name="svgasys" size="16" />
+	
+	<Style name="close_btn_style" value="width=&quot;9&quot; height=&quot;9&quot; cursor=&quot;hand&quot; normalimage=&quot;file='sysbtn/close_normal.png'&quot; hotimage=&quot;file='sysbtn/close_hover.png'&quot; pushedimage=&quot;file='sysbtn/close_hover.png'&quot;" />
+	
+	<Default name="HScrollBar" value="width=&quot;15&quot; cursor=&quot;hand&quot; showbutton1=&quot;true&quot; button1normalimage=&quot;file='scroll/scroll_left.png'&quot; showbutton2=&quot;true&quot; button2normalimage=&quot;file='scroll/scroll_right.png'&quot; thumbnormalimage=&quot;file='scroll/hscrollbar.png' &quot; thumbhotimage=&quot;file='scroll/hscrollbar.png' thumbpushedimage=&quot;file='scroll/hscrollbar.png' railnormalimage=&quot;&quot; railhotimage=&quot;&quot; railpushedimage=&quot;&quot; raildisabledimage=&quot;&quot; bknormalimage=&quot;&quot; bkhotimage=&quot;&quot; bkpushedimage=&quot;&quot; bkdisabledimage=&quot;&quot; "/>
+	<Default name="VScrollBar" value="width=&quot;15&quot; cursor=&quot;hand&quot; showbutton1=&quot;true&quot; button1normalimage=&quot;file='scroll/scroll_top.png'&quot; showbutton2=&quot;true&quot; button2normalimage=&quot;file='scroll/scroll_down.png'&quot; thumbnormalimage=&quot;file='scroll/vscrollbar.png' &quot; thumbhotimage=&quot;file='scroll/vscrollbar.png' thumbpushedimage=&quot;file='scroll/vscrollbar.png' railnormalimage=&quot;&quot; railhotimage=&quot;&quot; railpushedimage=&quot;&quot; raildisabledimage=&quot;&quot; bknormalimage=&quot;&quot; bkhotimage=&quot;&quot; bkpushedimage=&quot;&quot; bkdisabledimage=&quot;&quot; "/>
+	
+	<Style name="element_style" value="height=&quot;32&quot;" />
+	<Style name="label_style" value="textcolor=&quot;#FFF0F888&quot; font=&quot;2&quot; height=&quot;30&quot; align=&quot;right&quot; " />
+
+	<Font id="0" name="宋体" size="14" default="true" />
+	<Font id="1" name="宋体" size="12" />
+	<Font id="2" name="宋体" size="15" />
+	<Font id="3" name="宋体" size="15" bold="true"/>
+	<Font id="4" name="svgasys" size="16" />
+
+
+	<VerticalLayout bkcolor="#FF000000">
+		<HorizontalLayout name="appbar" height="36" inset="10,10,12,12" bkcolor="#FF52555A">
+        <Label name="labelTitle" valign="vcenter" text="开启日历" textcolor="#FFd9d9d9" font="0" />
+        <Button name="closebtn" style="close_btn_style" cussor="hand" tooltip="关闭" />
+    	</HorizontalLayout>
+		<VerticalLayout height="50">
+			<HorizontalLayout>
+				<Button name="btnstart" text="开始" bkcolor="#FFF5DEB3" padding="8,8,8,8" borderround="5,5"/>
+				<HorizontalLayout>
+				</HorizontalLayout>	
+			</HorizontalLayout>
+		</VerticalLayout>
+		<VerticalLayout > 
+		<!--list开始-->
+			<hxList name="hxlist" itemshowhtml="true" itemfont="4" vscrollbar="true" hscrollbar="true" itemlinecolor="#FF222222" itemshowrowline="true" itemshowcolumnline="true" itemtextcolor="#FFF0F888" itemhottextcolor="#FFF0F888" itemselectedbkcolor="#FF420084" itemhotbkcolor="#FF182218" itemselectedtextcolor="#FFF0F888" itemalign="right" >
+				<ListHeader height="30">
+					
+					<ListHeaderItem text="日期" width="100" height="30" textcolor="#FF808080" font="4" textpadding="2,0,0,0" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="涨停家数" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="跌停家数" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="开板数" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="封板率" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="连板数" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="最高连板数" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="上证涨幅" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+				</ListHeader>
+			</hxList>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>
