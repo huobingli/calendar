@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+	<Style name="label_style" value="bordersize=&quot;0,1,0,1&quot; bordercolor=&quot;#FFCCCCCC&quot;" />
+		
+  <ListContainerElement height="32" sytle="label_style">
+	  <VerticalLayout height="32">
+		<HorizontalLayout>
+		  <VerticalLayout name="logo_container" width="50">
+			<Label name="logo" width="40" height="32" textcolor="#FF808080" />
+		  </VerticalLayout>
+		  <VerticalLayout >
+			<HorizontalLayout>
+			  <Label name="nickname" text="default" bordersize="0" width="80" textcolor="#FF000000" disabledtextcolor="#FF808080" />
+			  <Label name="description" width="100" bordersize="0" textcolor="#FF808080" />
+			</HorizontalLayout>
+		  </VerticalLayout>
+		</HorizontalLayout>
+	  </VerticalLayout>
+  </ListContainerElement>
+</Window>
