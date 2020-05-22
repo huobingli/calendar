@@ -83,7 +83,21 @@ public:
 		for (int i = 0; i < nCount; i++)
 		{
 			CLabelUI* pLabel = new CLabelUI;
-			pLabel->ApplyAttributeList(m_pm->GetStyle("label_style"));
+			if (i == 0)
+			{
+				pLabel->ApplyAttributeList(m_pm->GetStyle("label_style"));
+				pLabel->ApplyAttributeList(m_pm->GetStyle("label_style_grey"));
+			}				
+			else
+			{
+				pLabel->ApplyAttributeList(m_pm->GetStyle("label_style_right"));
+			}
+
+			if (i == 1)
+				pLabel->ApplyAttributeList(m_pm->GetStyle("label_style_red"));
+			if (i == 2)
+				pLabel->ApplyAttributeList(m_pm->GetStyle("label_style_green"));
+			
 			if (pLabel)
 			{
 				pLabel->SetText(itemdata[i]);
