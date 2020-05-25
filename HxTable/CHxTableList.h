@@ -80,6 +80,7 @@ public:
 		Add(pItemUI);
 		nCount = nCount > itemdata.size() ? itemdata.size() : nCount;
 
+		// 增加 不同的风格 align color etc.
 		for (int i = 0; i < nCount; i++)
 		{
 			CLabelUI* pLabel = new CLabelUI;
@@ -126,7 +127,7 @@ public:
 
 	void InitWindow()
 	{
-
+		ReadTableHeader();
 	}
 
 	CDuiString GetSkinFile() {
@@ -188,5 +189,11 @@ public:
 		}
 
 		WindowImplBase::Notify(msg);
+	}
+
+	// to do!!  read table header from xml file 
+	void ReadTableHeader()
+	{
+
 	}
 };
