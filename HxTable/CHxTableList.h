@@ -130,7 +130,8 @@ public:
 
 	void InitWindow()
 	{
-		ReadTableHeader();
+		char strFile[] = "D:\\GitProject\\calendar\\HxTable\\bin\\tableHeader.xml";
+		ReadTableHeader(strFile);
 	}
 
 	CDuiString GetSkinFile() {
@@ -195,30 +196,31 @@ public:
 	}
 
 	// to do!!  read table header from xml file 
-	void ReadTableHeader()
+	void ReadTableHeader(const char* strFileName)
 	{
 		CHxTableList* pList = static_cast<CHxTableList*>(m_pm.FindControl(_T("hxlist")));
 		if (pList)
 		{
-			CListHeaderItemUI* pHeader = new CListHeaderItemUI;
-			pHeader->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
-			pHeader->SetText(_T("日期"));
-			pList->GetHeader()->Add(pHeader);
+			
+			pugi::xml_document xmlDoc;
+			if (!xmlDoc.load_file(strFileName, pugi::parse_default, pugi::encoding_utf8))
+			{
+				//std::cout << "read " << strFileName << " failed" << std::endl;
 
-			CListHeaderItemUI* pHeader1 = new CListHeaderItemUI;
-			pHeader1->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
-			pHeader1->SetText(_T("代码"));
-			pList->GetHeader()->Add(pHeader1);
+				return;
+			}
 
-			CListHeaderItemUI* pHeader2 = new CListHeaderItemUI;
-			pHeader2->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
-			pHeader2->SetText(_T("涨停"));
-			pList->GetHeader()->Add(pHeader2);
-
-			CListHeaderItemUI* pHeader3 = new CListHeaderItemUI;
-			pHeader3->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
-			pHeader3->SetText(_T("跌停"));
-			pList->GetHeader()->Add(pHeader3);
+			// to do!! 编码格式存在问题
+			pugi::xml_node nodeRoot = xmlDoc.child("table");
+			for (pugi::xml_node node = nodeRoot.first_child(); node; node = node.next_sibling())
+			{
+				//std::cout << "\t" << node.attribute("name").value() << "," << node.attribute("score").value() << std::endl;
+				CListHeaderItemUI* pHeader = new CListHeaderItemUI;
+				pHeader->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
+				CDuiString strText = node.attribute("name").value();
+				pHeader->SetText(strText);
+				pList->GetHeader()->Add(pHeader);
+			}
 		}
 	}
 };

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<table>
+	<node name="代码" align="left" color="grey"/>
+	<node name="名称" align="left" color="grey" />
+	<node name="时间" align="center" color="grey" />
+	<node name="涨停" align="left" color="red" />
+	<node name="跌停" align="left" color="green" />
+	<node name="连板" align="left" color="red" />
+</table>
