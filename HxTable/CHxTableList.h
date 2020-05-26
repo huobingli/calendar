@@ -197,6 +197,28 @@ public:
 	// to do!!  read table header from xml file 
 	void ReadTableHeader()
 	{
+		CHxTableList* pList = static_cast<CHxTableList*>(m_pm.FindControl(_T("hxlist")));
+		if (pList)
+		{
+			CListHeaderItemUI* pHeader = new CListHeaderItemUI;
+			pHeader->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
+			pHeader->SetText(_T("ÈÕÆÚ"));
+			pList->GetHeader()->Add(pHeader);
 
+			CListHeaderItemUI* pHeader1 = new CListHeaderItemUI;
+			pHeader1->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
+			pHeader1->SetText(_T("´úÂë"));
+			pList->GetHeader()->Add(pHeader1);
+
+			CListHeaderItemUI* pHeader2 = new CListHeaderItemUI;
+			pHeader2->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
+			pHeader2->SetText(_T("ÕÇÍ£"));
+			pList->GetHeader()->Add(pHeader2);
+
+			CListHeaderItemUI* pHeader3 = new CListHeaderItemUI;
+			pHeader3->ApplyAttributeList(m_pm.GetStyle(_T("label_style_grey")));
+			pHeader3->SetText(_T("µøÍ£"));
+			pList->GetHeader()->Add(pHeader3);
+		}
 	}
 };

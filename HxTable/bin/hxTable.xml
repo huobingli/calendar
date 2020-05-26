@@ -12,7 +12,13 @@
 	<Default name="VScrollBar" value="width=&quot;15&quot; cursor=&quot;hand&quot; showbutton1=&quot;true&quot; button1normalimage=&quot;file='scroll/scroll_top.png'&quot; showbutton2=&quot;true&quot; button2normalimage=&quot;file='scroll/scroll_down.png'&quot; thumbnormalimage=&quot;file='scroll/vscrollbar.png' &quot; thumbhotimage=&quot;file='scroll/vscrollbar.png' thumbpushedimage=&quot;file='scroll/vscrollbar.png' railnormalimage=&quot;&quot; railhotimage=&quot;&quot; railpushedimage=&quot;&quot; raildisabledimage=&quot;&quot; bknormalimage=&quot;&quot; bkhotimage=&quot;&quot; bkpushedimage=&quot;&quot; bkdisabledimage=&quot;&quot; "/>
 	
 	<Style name="element_style" value="height=&quot;32&quot;" />
-	<Style name="label_style" value="textcolor=&quot;#FFF0F888&quot; font=&quot;2&quot; height=&quot;30&quot; align=&quot;right&quot; " />
+	<Style name="label_style" value="textcolor=&quot;#FFF0F888&quot; font=&quot;2&quot; height=&quot;30&quot; align=&quot;center&quot; " />
+	<Style name="label_style_left" value="textcolor=&quot;#FFF0F888&quot; font=&quot;2&quot; height=&quot;30&quot; align=&quot;left&quot; " />
+	<Style name="label_style_right" value="textcolor=&quot;#FFF0F888&quot; font=&quot;2&quot; height=&quot;30&quot; align=&quot;right&quot; " />
+
+	<Style name="label_style_grey" value="textcolor=&quot;#FFAAAAAA&quot; " />
+	<Style name="label_style_red" value="textcolor=&quot;#FFFF0000&quot; " />
+	<Style name="label_style_green" value="textcolor=&quot;#FF00FF00&quot; " />
 
 	<Font id="0" name="宋体" size="14" default="true" />
 	<Font id="1" name="宋体" size="12" />
@@ -38,12 +44,12 @@
 			<hxList name="hxlist" itemshowhtml="true" itemfont="4" vscrollbar="true" hscrollbar="true" itemlinecolor="#FF222222" itemshowrowline="true" itemshowcolumnline="true" itemtextcolor="#FFF0F888" itemhottextcolor="#FFF0F888" itemselectedbkcolor="#FF420084" itemhotbkcolor="#FF182218" itemselectedtextcolor="#FFF0F888" itemalign="right" >
 				<ListHeader height="30">
 					
-					<ListHeaderItem text="代码" width="100" height="30" textcolor="#FF808080" font="4" textpadding="2,0,0,0" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<!-- <ListHeaderItem text="代码" width="100" height="30" textcolor="#FF808080" font="4" textpadding="2,0,0,0" dragable="true" bordersize="1" bordercolor="#FF420084" />
 					<ListHeaderItem text="名称" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
 					<ListHeaderItem text="时间" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
 					<ListHeaderItem text="涨停" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
 					<ListHeaderItem text="跌停" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
-					<ListHeaderItem text="连板" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" />
+					<ListHeaderItem text="连板" width="100" height="30" textcolor="#FF808080" font="4" align="center" dragable="true" bordersize="1" bordercolor="#FF420084" /> -->
 				</ListHeader>
 			</hxList>
 		</VerticalLayout>
