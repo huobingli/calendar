@@ -3,6 +3,9 @@
 #include "..\DuiLib\UIlib.h"
 #include "..\DuiLib\Core\UIBase.h"
 
+#include "pugixml/pugixml.hpp"
+
+using namespace pugi;
 using namespace std;
 using namespace DuiLib;
 

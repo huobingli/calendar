@@ -41,8 +41,6 @@
 *.dll
 *.lib
 *.exp
-*.vcxproj
-*.filters
 
 Duilib.tlog/
 ListDemo.tlog/
