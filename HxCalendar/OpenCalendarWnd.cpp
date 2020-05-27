@@ -32,12 +32,24 @@ void OpenCalendarWnd::Notify(TNotifyUI& msg)
 		{
 			ShowHxCalendar();
 		}
+		else if (strName.CompareNoCase(_T("mutlicalendar")) == 0)
+		{
+			ShowHxMutliCalendar();
+		}
 	}
 }
 
 void OpenCalendarWnd::ShowHxCalendar()
 {
 	HxCalendarWnd *pFrame = new HxCalendarWnd;
+
+	pFrame->CreateDuiWindow(NULL, _T("日历测试"), UI_WNDSTYLE_DIALOG, 0L);
+	pFrame->CenterWindow();
+}
+
+void OpenCalendarWnd::ShowHxMutliCalendar()
+{
+	HxMutiCalendarWnd *pFrame = new HxMutiCalendarWnd;
 
 	pFrame->CreateDuiWindow(NULL, _T("日历测试"), UI_WNDSTYLE_DIALOG, 0L);
 	pFrame->CenterWindow();

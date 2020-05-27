@@ -20,6 +20,8 @@ public:
 
 	void Notify(TNotifyUI& msg);
 	void ShowHxCalendar();
+	void ShowHxMutliCalendar();
+
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 };
 
