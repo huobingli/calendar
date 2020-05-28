@@ -547,6 +547,7 @@ LRESULT HxCalendarWnd::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
 //////////////////////////////////////////////////////////////////////////
 HxMutiCalendarWnd::HxMutiCalendarWnd()
 {
+	m_dwProcess = clickprocess::startclick;
 }
 
 
@@ -626,7 +627,7 @@ void HxMutiCalendarWnd::InitEndTileList(int nMode)
 			str.Format(_T("%d"), i * j);
 			//pGameItem->SetTag()
 			pCalendar->SetText(str);
-			//pCalendar->SetGroup(strGroup);
+			pCalendar->SetGroup(strGroup);
 		}
 	}
 }
@@ -690,6 +691,22 @@ void HxMutiCalendarWnd::Notify(TNotifyUI& msg)
 		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
 		{
 			CDuiString str = msg.pSender->GetText();
+			
+			CCalendarItemUI* pItem = static_cast<CCalendarItemUI*>(msg.pSender);
+			if (pItem)
+			{
+				if (clickprocess::startclick == m_dwProcess)
+				{
+					pItem->SetGroup("1");
+					m_dwProcess = firstclick;
+				}
+				else if(m_dwProcess == firstclick)
+				{
+					m_dwProcess = secondclick;
+					pItem->SetGroup(_T("2"));
+					m_dwProcess = endclick;
+				}
+			}
 		}
 
 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
@@ -1161,6 +1178,34 @@ LRESULT HxMutiCalendarWnd::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 	bHandled = FALSE;
 	return 0;
+}
+
+LRESULT HxMutiCalendarWnd::OnMouseMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+	POINT pt;
+	pt.x = GET_X_LPARAM(lParam);
+	pt.y = GET_Y_LPARAM(lParam);
+	//::ScreenToClient(*this, &pt);
+
+	RECT rcClient;
+	::GetClientRect(*this, &rcClient);
+	CControlUI* pControl = static_cast<CControlUI*>(m_pm.FindControl(pt));
+
+	if (m_dwProcess == clickprocess::firstclick)
+	{
+		if (pControl && _tcscmp(pControl->GetName(), _T("Calendaritem")) == 0)
+		{
+			CDuiString strClass = pControl->GetName();
+			CCalendarItemUI* pItem = static_cast<CCalendarItemUI*>(pControl);
+			if (pItem)
+			{
+				CDuiString strClass = pControl->GetName();
+			}
+			int n = 0;
+		}
+	}	
+
+	return WindowImplBase::OnMouseMove(uMsg, wParam, lParam, bHandled);
 }
 
 LRESULT HxMutiCalendarWnd::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)

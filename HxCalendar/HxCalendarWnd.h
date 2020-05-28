@@ -126,6 +126,14 @@ private:
 	CDuiString m_strSelectDate;
 };
 
+enum clickprocess
+{
+	startclick = 0,
+	firstclick,
+	secondclick,
+	endclick
+};
+
 class HxMutiCalendarWnd : public WindowImplBase, public IListCallbackUI
 {
 public:
@@ -165,6 +173,7 @@ protected:
 	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem);
 	LRESULT OnAddListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT OnMouseMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 private:
@@ -184,6 +193,7 @@ private:
 
 	CDuiString m_strBeginDate;
 	CDuiString m_strEndDate;
+	DWORD m_dwProcess;
 
 	DWORD m_dwRow;	// ÐÐ 
 	DWORD m_dwCol;	// ÁÐ
