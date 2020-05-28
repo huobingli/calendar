@@ -161,7 +161,7 @@ void HxCalendarWnd::InitTileList()
 			str.Format(_T("%d"), i * j);
 			//pGameItem->SetTag()
 			pCalendar->SetText(str);
-			//pCalendar->SetGroup(strGroup);
+			pCalendar->SetGroup(strGroup);
 		}
 	}
 }
@@ -200,7 +200,7 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
 		{
-			CDuiString str = msg.pSender->GetText();
+			m_strSelectDate = msg.pSender->GetText();
 		}
 
 // 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)

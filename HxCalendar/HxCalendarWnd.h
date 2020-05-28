@@ -122,6 +122,8 @@ private:
 
 	DWORD m_dwRow;	// 行 
 	DWORD m_dwCol;	// 列
+
+	CDuiString m_strSelectDate;
 };
 
 class HxMutiCalendarWnd : public WindowImplBase, public IListCallbackUI
@@ -174,12 +176,14 @@ private:
 
 	UINT m_EndCurYear;
 	UINT m_EndCurMonth;
-	//CPaintManagerUI m_pm;
 	SYSTEMTIME m_sysTime;
 
 	CButtonUI * m_pCloseBtn;
 	CLabelUI * m_pBeginCurentDate;
 	CLabelUI * m_pEndCurentDate;
+
+	CDuiString m_strBeginDate;
+	CDuiString m_strEndDate;
 
 	DWORD m_dwRow;	// 行 
 	DWORD m_dwCol;	// 列
