@@ -712,7 +712,7 @@ void HxMutiCalendarWnd::Notify(TNotifyUI& msg)
 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
 		{
 			Close(IDCANCEL);
-			return;
+			//return;
 		}
 		//单击下个月份
 		if (msg.pSender->GetName() == _T("btn_begin_month_next"))
