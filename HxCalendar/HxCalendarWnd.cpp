@@ -155,7 +155,7 @@ void HxCalendarWnd::InitTileList()
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
+			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), NULL, &callback, &m_pm));
 			pList->Add(pCalendar);
 			CDuiString str;
 			str.Format(_T("%d"), i * j);
@@ -627,7 +627,7 @@ void HxMutiCalendarWnd::InitEndTileList(int nMode)
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
+			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), NULL, &callback, &m_pm));
 			pList->Add(pCalendar);
 			CDuiString str;
 			str.Format(_T("%d"), i * j);
