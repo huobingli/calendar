@@ -155,7 +155,7 @@ void HxCalendarWnd::InitTileList()
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
+			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), NULL, &callback, &m_pm));
 			pList->Add(pCalendar);
 			CDuiString str;
 			str.Format(_T("%d"), i * j);
@@ -200,7 +200,13 @@ void HxCalendarWnd::Notify(TNotifyUI& msg)
 
 		if (strName.CompareNoCase(_T("CalendarItem")) == 0)
 		{
-			m_strSelectDate = msg.pSender->GetText();
+			//m_strSelectDate = msg.pSender->GetText();
+
+			CCalendarItemUI* pItem = static_cast<CCalendarItemUI*>(msg.pSender);
+			if (pItem)
+			{
+				m_strSelectDate.SmallFormat(_T("%4d-%02d-%02d"), m_CurYear, m_CurMonth, atoi(pItem->GetText()));
+			}
 		}
 
 // 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
@@ -621,7 +627,7 @@ void HxMutiCalendarWnd::InitEndTileList(int nMode)
 		{
 			CDialogBuilderCallbackEx callback;
 			CDialogBuilder builder;
-			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), (UINT)0, &callback, &m_pm));
+			CCalendarItemUI* pCalendar = static_cast<CCalendarItemUI*>(builder.Create(_T("CalendarItem.xml"), NULL, &callback, &m_pm));
 			pList->Add(pCalendar);
 			CDuiString str;
 			str.Format(_T("%d"), i * j);
@@ -695,24 +701,33 @@ void HxMutiCalendarWnd::Notify(TNotifyUI& msg)
 			CCalendarItemUI* pItem = static_cast<CCalendarItemUI*>(msg.pSender);
 			if (pItem)
 			{
+				
 				if (clickprocess::startclick == m_dwProcess)
 				{
 					pItem->SetGroup("1");
 					m_dwProcess = firstclick;
+					m_strBeginDate.SmallFormat(_T("%4d-%02d-%02d"), m_BeginCurYear, m_BeginCurMonth, atoi(pItem->GetText()));
 				}
 				else if(m_dwProcess == firstclick)
 				{
 					m_dwProcess = secondclick;
 					pItem->SetGroup(_T("2"));
 					m_dwProcess = endclick;
+					m_strEndDate.SmallFormat(_T("%4d-%02d-%02d"), m_EndCurYear, m_EndCurMonth, atoi(pItem->GetText()));
 				}
 			}
+
+			CDuiString strSelectTime;
+			
+			strSelectTime = m_strBeginDate + _T(" - ") + m_strEndDate;
+			
+
 		}
 
 		if (strName.CompareNoCase(_T("btn_monthcal_close")) == 0)
 		{
 			Close(IDCANCEL);
-			return;
+			//return;
 		}
 		//单击下个月份
 		if (msg.pSender->GetName() == _T("btn_begin_month_next"))
