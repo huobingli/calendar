@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window caption="0,0,0,32" size="600,400" roundcorner="3,3" >
+    <Font id="0" name="宋体" size="12" default="true"/>
+    <VerticalLayout width="600" height="376">
+        <HorizontalLayout height="24" bkimage="headerctrl.bmp" childvalign="vcenter">
+            <control width="14" height="16" foreimage="login_filter_button.png"  />
+           	<Label text="测试" font="0" padding="10,0,0,0" textcolor="#FF000000" />
+           	<Button name="btn_min" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;login_min_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;login_min_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;login_min_button.png&apos; source=&apos;32,0,48,16&apos;" />
+            <control width="14" height="16" foreimage="login_filter_button.png"  />
+           	<Button name="btn_max" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;login_max_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;login_max_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;login_max_button.png&apos; source=&apos;32,0,48,16&apos;" />
+            <control width="14" height="16" foreimage="login_filter_button.png"  />
+            <Button name="btn_close" width="16" height="16" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;login_close_button.png&apos; source=&apos;0,0,16,16&apos;" hotimage="file=&apos;login_close_button.png&apos; source=&apos;16,0,32,16&apos;" pushedimage="file=&apos;login_close_button.png&apos; source=&apos;32,0,48,16&apos;" />
+        </HorizontalLayout>
+        <HorizontalLayout height="352">
+            <WebBrowser name="oneclick_browser" homepage="https://www.baidu.com/" autonavi="true"/>
+        </HorizontalLayout>
+        <HorizontalLayout height="24" bkimage="headerctrl.bmp" childvalign="vcenter">
+          <Control />
+          <Label text="七天内不显示" font="0" textcolor="#FF000000" />
+        </HorizontalLayout>
+    </VerticalLayout>
+   
+</Window>
