@@ -19,4 +19,5 @@ public:
 	}
 	LPCTSTR GetWindowClassName() const { return _T("UICustomizeDlg"); };
 
+	void Notify(TNotifyUI& msg);
 };
